@@ -1,72 +1,196 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Ahtesham Ibne Mostafa - Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-    
-    h1 {
-      font-size: 30px;
-    }
-    
-    main {
-      padding: 20px;
-    }
-    
-    footer {
-      background-color: #333;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-    }
-  </style>
+	<title>Ahtesham Ibne Mostafa | Portfolio</title>
+	<meta charset="utf-8">
+	<meta name="google-site-verification" content="gknZmopny-lzBW-kfhyaZCL0DMdqfEnWMdmrQins_vk" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:title" content="Ahtesham Ibne Mostafa | Portfolio" />
+	<meta property="og:url" content="https://ahtesham-ibne-mostafa.github.io/" />
+	<meta property="og:description"
+		content="This is my personal portfolio website. You can check my resume, projects and other activities." />
+	<meta property="og:image"
+		content="https://github.com/Ahtesham-Ibne-Mostafa/Ahtesham-Ibne-Mostafa.github.io/blob/main/images/FA50g13UUAU09ts.jpeg">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179117003-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-179117003-1');
+	</script>
+
+
+	<link rel="icon" type="image/jpg" href="images/icon.jpg" />
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+	<link rel="stylesheet" href="css/animate.css">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<link rel="stylesheet" href="css/aos.css">
+
+	<link rel="stylesheet" href="css/ionicons.min.css">
+
+	<link rel="stylesheet" href="css/flaticon.css">
+	<link rel="stylesheet" href="css/icomoon.css">
+	<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-  <header>
-    <h1>Ahtesham Ibne Mostafa</h1>
-    <p>Web Developer</p>
-  </header>
-  
-  <main>
-    <h2>About Me</h2>
-    <p>I am a passionate web developer with expertise in HTML, CSS, and JavaScript. I enjoy creating responsive and user-friendly websites.</p>
-    
-    <h2>Skills</h2>
-    <ul>
-      <li>HTML5</li>
-      <li>CSS3</li>
-      <li>JavaScript</li>
-      <li>Responsive Web Design</li>
-    </ul>
-    
-    <h2>Projects</h2>
-    <ul>
-      <li>
-        <h3>Project 1</h3>
-        <p>Description of project 1.</p>
-      </li>
-      <li>
-        <h3>Project 2</h3>
-        <p>Description of project 2.</p>
-      </li>
-      <!-- Add more project entries as needed -->
-    </ul>
-  </main>
-  
-  <footer>
-    <p>&copy; 2023 Ahtesham Ibne Mostafa</p>
-  </footer>
+<style>
+	html,
+	body {
+		max-width: 100%;
+		overflow-x: hidden;
+	}
+
+	@media only screen and (max-width: 768px) {
+
+		/* For mobile phones: */
+		.hidden-mobile {
+			display: none;
+		}
+	}
+
+	.fa {
+		padding: 10px;
+		font-size: 20px;
+		width: 50px;
+		text-align: center;
+		text-decoration: none;
+		margin: 5px 2px;
+	}
+
+	.fa:hover {
+		opacity: 0.7;
+	}
+
+	.fa-facebook {
+		background: #3B5998;
+		color: white;
+	}
+
+	.fa-linkedin {
+		background: #007bb5;
+		color: white;
+	}
+
+	.fa-youtube {
+		background: #bb0000;
+		color: white;
+	}
+
+	.fa-instagram {
+		background: #125688;
+		color: white;
+	}
+</style>
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light site-navbar-target"
+		id="ftco-navbar">
+		<div class="container">
+			<a class="navbar-brand" href="index.html">Ahtesham Ibne Mostafa</a>
+			<button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav nav ml-auto">
+					<li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
+					<li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
+					<li class="nav-item"><a href="#experience-section" class="nav-link"><span>Experience</span></a></li>
+					<li class="nav-item"><a href="#education-section" class="nav-link"><span>Education</span></a></li>
+					<li class="nav-item"><a href="#publications-section" class="nav-link"><span>Publications</span></a>
+					</li>
+					<li class="nav-item"><a href="#projects-section" class="nav-link"><span>Projects</span></a></li>
+					<li class="nav-item"><a href="#skills-section" class="nav-link"><span>Skills</span></a></li>
+					<li class="nav-item"><a href="#awards-section" class="nav-link"><span>Awards</span></a></li>
+					<li class="nav-item"><a href="#cocurricular-section" class="nav-link"><span>Co-curricular</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<section class="hero-wrap js-fullheight" style="background-image: url('images/hero.jpg');"
+		data-section="home-section">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row no-gutters slider-text js-fullheight justify-content-center align-items-center"
+				data-scrollax-parent="true">
+				<div class="col-lg-8 ftco-animate mt-md-5">
+					<h1 class="mb-4">Hi! <span>I'm</span></h1>
+					<h1 class="mb-4">Ahtesham Ibne Mostafa</h1>
+					<h2 class="subheading mb-4">I'm a University Student &amp; Researcher</h2>
+					<p><a href="#" class="btn btn-primary py-3 px-4">Download CV</a></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb" id="about-section">
+		<div class="container">
+			<div class="row d-flex">
+				<div class="col-md-6 col-lg-5 d-flex">
+					<div class="img-about img d-flex align-items-stretch">
+						<div class="overlay"></div>
+						<div class="img d-flex align-self-stretch align-items-center"
+							style="background-image:url(images/about.jpg);">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-lg-7 pl-lg-5 py-5">
+					<div class="row justify-content-start pb-3">
+						<div class="col-md-12 heading-section ftco-animate">
+							<span class="subheading">Welcome</span>
+							<h2 class="mb-4">About Me</h2>
+							<p>
+								Hello! I'm Ahtesham Ibne Mostafa, a passionate and enthusiastic university student
+								pursuing my studies in Computer Science. I have a strong interest in research and love
+								exploring new technologies and frameworks.
+							</p>
+							<p>
+								I'm experienced in various programming languages and have worked on several
+								projects, both personal and collaborative. My goal is to leverage my skills and
+								knowledge to contribute to innovative projects and make a positive impact in the
+								technology industry.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Rest of the HTML code -->
+
+	<!-- External JavaScript libraries -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script src="js/jquery.waypoints.min.js"></script>
+	<script src="js/jquery.stellar.min.js"></script>
+	<script src="js/owl.carousel.min.js"></script>
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/aos.js"></script>
+	<script src="js/jquery.animateNumber.min.js"></script>
+	<script src="js/scrollax.min.js"></script>
+
+	<!-- Custom JavaScript -->
+	<script src="js/main.js"></script>
+
 </body>
+
 </html>
 
