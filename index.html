@@ -70,7 +70,7 @@
           <li class="active"><a href="#header"> <span>Home</span></a></li>
           <li><a href="#about"><span>About</span></a></li>
           <li><a href="#education"> <span>Education</span></a></li>
-          <li><a href="#experience"> <span>Research & Experience</span></a></li>
+          <li><a href="#experience"> <span>Research Experience</span></a></li>
 <!--          <li><a href="#projects"> <span>Projects</span></a></li>-->
           <li><a href="#portfolio"> <span>Projects</span></a></li>
           <li><a href="#skills"> <span>Skills</span></a></li>
@@ -426,70 +426,93 @@
 
 
 
-  <!-- Start Project Section -->
-  <section id="portfolio" class="portfolio">
-    <div class="container">
+<!-- Start Project Section --> 
+<section id="portfolio" class="portfolio">
+  <div class="container">
 
-      <div class="section-title">
-        <h2>Projects</h2>
-      </div>
+    <div class="section-title">
+      <h2>Projects</h2>
+    </div>
 
-      <div class="row">
-        <div class="col-lg-12 d-flex justify-content-center">
-          <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">Web-App</li>
-            <li data-filter=".filter-project">Project</li>
-          </ul>
-        </div>
-      </div>
-        <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <center><h4>To-Do App</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/todo.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <div class="portfolio-links">
-                <a href="projects/todo.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <br>
-          <center><h4>University Management System</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/blog.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <div class="portfolio-links">
-                <a href="projects/blog.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-project">
-          <center><h4>Empty Room Finder In BRAC University</h4></center>
-          <div class="portfolio-wrap">
-            <img src="assets/img/project/vdg.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <div class="portfolio-links">
-                <a href="projects/vdg.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-
-
-
+    <div class="row">
+      <div class="col-lg-12 d-flex justify-content-center">
+        <ul id="portfolio-flters">
+          <li data-filter="*" class="filter-active">All</li>
+          <li data-filter=".filter-app">Web-App</li>
+          <li data-filter=".filter-project">Project</li>
+        </ul>
       </div>
     </div>
-  </section>
 
-  <!-- End Project Section -->
+    <div class="row d-flex align-items-stretch">
+
+      <!-- University Management System -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-app d-flex">
+        <div class="portfolio-wrap w-100 d-flex flex-column">
+          <center><h4>University Management System (PHP/MERN)</h4></center>
+          <img src="assets/img/project/todo.jpg" class="img-fluid" alt="">
+          <div class="portfolio-info mt-auto">
+            <p>Created academic management & communication platforms with authentication and real-time messaging.</p>
+            <div class="portfolio-links">
+              <a href="projects/blog.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- MiniVSFS -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-project d-flex">
+        <div class="portfolio-wrap w-100 d-flex flex-column">
+          <center><h4>MiniVSFS – C-based Virtual Filesystem</h4></center>
+          <img src="assets/img/project/vdg.jpg" class="img-fluid" alt="">
+          <div class="portfolio-info mt-auto">
+            <p>Implemented minimal VSFS with custom data structures. <a href="https://github.com/Ahtesham-Ibne-Mostafa/MiniVSFS" target="_blank">GitHub Repo</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Survival Game / Catch the Diamonds -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-project d-flex">
+        <div class="portfolio-wrap w-100 d-flex flex-column">
+          <center><h4>3D Survival Game / Catch the Diamonds (PyOpenGL)</h4></center>
+          <img src="assets/img/project/recommender.jpg" class="img-fluid" alt="">
+          <div class="portfolio-info mt-auto">
+            <p>Built Python-based 3D and 2D games with animation, collision detection, and GUI. <a href="https://github.com/Ahtesham-Ibne-Mostafa/3D-Survival-Game" target="_blank">GitHub Repo</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARE4ALL MediCenter -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-app d-flex">
+        <div class="portfolio-wrap w-100 d-flex flex-column">
+          <center><h4>CARE4ALL MediCenter (MERN)</h4></center>
+          <img src="assets/img/project/gan.jpg" class="img-fluid" alt="">
+          <div class="portfolio-info mt-auto">
+            <p>Healthcare management system with role-based dashboards, JWT authentication, and patient management. <a href="https://github.com/Ahtesham-Ibne-Mostafa/CARE4ALL-MediCenter" target="_blank">GitHub Repo</a></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty Room Finder -->
+      <div class="col-lg-4 col-md-6 portfolio-item filter-project d-flex">
+        <div class="portfolio-wrap w-100 d-flex flex-column">
+          <center><h4>Empty Room Finder In BRAC University</h4></center>
+          <img src="assets/img/project/ml.jpg" class="img-fluid" alt="">
+          <div class="portfolio-info mt-auto">
+            <div class="portfolio-links">
+              <a href="projects/vdg.html" data-gall="portfolioDetailsGallery" data-vbtype="iframe" class="venobox" title="Project Details"><i class="bx bx-info-circle"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- End Project Section -->
+
+
 
 
 
