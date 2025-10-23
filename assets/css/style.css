@@ -15,6 +15,26 @@ body {
   background: transparent;
 }
 
+.quote {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #cccccc;
+  text-align: center;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+}
+
+.quote {
+  font-style: italic;
+  font-size: 1.1rem;
+  color: #d0d0d0;
+  text-align: center;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px rgba(18, 214, 64, 0.3);
+}
+
+
 body::before {
   content: "";
   position: fixed;
