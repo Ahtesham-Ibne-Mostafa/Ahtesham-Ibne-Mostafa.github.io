@@ -112,3 +112,16 @@ html,body { margin:0; padding:0; font-family: 'Open Sans', system-ui, Arial, san
 
 /* Small accessibility tweaks */
 a[role="button"], button { cursor: pointer; }
+
+.page-meta {
+  text-align: center;
+  color: #cbd5c8;
+  font-size: 0.95rem;
+  margin: 12px 0 32px;
+}
+.page-meta a {
+  color: #12d640;
+  word-break: break-all;
+  text-decoration: none;
+}
+.page-meta a:hover { text-decoration: underline; }
