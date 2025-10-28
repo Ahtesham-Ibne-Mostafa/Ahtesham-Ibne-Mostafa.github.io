@@ -62,5 +62,53 @@ html,body { margin:0; padding:0; font-family: 'Open Sans', system-ui, Arial, san
 .header-tops { padding: 18px 0; background:#0b0b0b; color:#fff; }
 .social-links a { display:inline-block; margin-left:6px; color:#fff; text-decoration:none; }
 
+/* Header fix: prevent name clipping and avoid nav overlap */
+.header-tops {
+  padding: 18px 0 !important;
+  overflow: visible !important;
+}
+
+.header-tops .container {
+  display: flex;
+  align-items: center;        /* vertically center title + nav */
+  gap: 16px;
+  flex-wrap: wrap;           /* allow nav to wrap on narrow screens */
+}
+
+/* ensure title and subtitle use full line-height and aren't cropped */
+.header-tops h1,
+.header-tops h2 {
+  margin: 0;
+  line-height: 1.2 !important;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  overflow: visible !important;
+}
+
+/* reserve room for nav so it doesn't compress the name */
+.nav-menu {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 240px;   /* increase if you need more room */
+  flex-wrap: wrap;
+}
+
+/* keep nav links compact but readable */
+.nav-menu a {
+  padding: 6px 10px;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+/* on small screens allow title to wrap and nav to center */
+@media (max-width: 768px) {
+  .header-tops .container { justify-content: center; }
+  .nav-menu { min-width: 0; width: 100%; justify-content: center; margin-top: 8px; }
+  .header-tops h1, .header-tops h2 { white-space: normal; text-align: center; }
+}
+
 /* Small accessibility tweaks */
 a[role="button"], button { cursor: pointer; }
