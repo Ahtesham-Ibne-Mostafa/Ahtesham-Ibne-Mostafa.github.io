@@ -741,5 +741,51 @@
 +    }
     })();
   </script>
+
+  <script>
+    // disable automatic restoration
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+    // helper: jump to top then optionally scroll to anchor smoothly
+    function navigateToAnchor(hash) {
+      const id = (hash || '').replace(/^#/, '');
+      // ensure start at top first
+      window.scrollTo(0, 0);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (!el) return;
+      // small delay to let layout settle and avoid browser auto-jump
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 60);
+    }
+
+    // handle clicks on internal nav links to avoid inconsistent browser scrolling
+    document.addEventListener('click', function (e) {
+      const a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      // allow external/empty hashes to behave normally
+      const href = a.getAttribute('href');
+      if (!href) return;
+      e.preventDefault();
+      // update URL without default jump, then manually navigate
+      history.pushState(null, '', href);
+      navigateToAnchor(href);
+    });
+
+    // if user navigates with back/forward or direct hash, handle it
+    window.addEventListener('hashchange', () => navigateToAnchor(location.hash));
+
+    // on initial load, force top then go to hash (if present)
+    window.addEventListener('load', () => {
+      // always start at top first
+      window.scrollTo(0, 0);
+      // then navigate to hash (if any) using our handler
+      if (location.hash) navigateToAnchor(location.hash);
+    });
+
+    // help some browsers when leaving
+    window.addEventListener('beforeunload', () => window.scrollTo(0, 0));
+  </script>
 </body>
 </html>
