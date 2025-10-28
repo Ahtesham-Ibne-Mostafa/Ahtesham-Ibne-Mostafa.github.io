@@ -125,3 +125,48 @@ a[role="button"], button { cursor: pointer; }
   text-decoration: none;
 }
 .page-meta a:hover { text-decoration: underline; }
+
+/* Responsive table wrapper */
+.table-wrap { width: 100%; overflow-x: auto; margin: 18px 0; -webkit-overflow-scrolling: touch; }
+
+/* Table base */
+.cv-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px; /* makes it horizontally scroll on small screens */
+  font-size: 0.95rem;
+  background: #0b0b0b;
+  color: #e6e6e6;
+}
+
+/* Header */
+.cv-table thead th {
+  background: #121212;
+  color: #12d640;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 2px solid rgba(255,255,255,0.06);
+}
+
+/* Body rows and cells */
+.cv-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: top;
+}
+
+/* Striped rows */
+.cv-table tbody tr:nth-child(odd) { background: rgba(18,214,64,0.02); }
+.cv-table tbody tr:nth-child(even) { background: transparent; }
+
+/* Hover effect */
+.cv-table tbody tr:hover { background: rgba(18,214,64,0.04); transform: translateY(-1px); transition: background .15s, transform .12s; }
+
+/* Links inside table */
+.cv-table a { color: #a7ffbf; text-decoration: none; }
+.cv-table a:hover { text-decoration: underline; }
+
+/* Small screens — reduce padding */
+@media (max-width: 640px) {
+  .cv-table thead th, .cv-table tbody td { padding: 10px 8px; font-size: 0.9rem; }
+}

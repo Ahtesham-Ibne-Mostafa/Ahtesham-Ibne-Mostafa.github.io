@@ -549,20 +549,44 @@
       <div class="section-title">
         <h2>Resume & Links</h2>
       </div>
-      <div class="row">
-        <div class="col-md-3 mt-4 mt-md-0 icon-box" data-aos="fade-up" data-aos-delay="100">
-          <a href="https://drive.google.com/file/d/1a9a7GA7maYRZKSXawbiAGU-b3_xIZ0ec/view?usp=drive_link" target="_blank"><div class="icon"><i class="icofont-page"></i></div></a>
-          <h4 class="title"><a href="https://drive.google.com/file/d/1a9a7GA7maYRZKSXawbiAGU-b3_xIZ0ec/view?usp=drive_link" target="_blank">Resume</a></h4>
-          <p class="description" style="color:#fff;">The link contains downloadable resume</p>
-        </div>
-        <div class="col-md-3 mt-4 mt-md-0 icon-box" data-aos="fade-up" data-aos-delay="100">
-          <a href="https://github.com/Ahtesham-Ibne-Mostafa/Machine_Etymology" target="_blank"><div class="icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#12d640" xmlns="http://www.w3.org/2000/svg"><path d="M3.9 12a5 5 0 017.07-7.07l1.41 1.41-1.41 1.41L9.56 7.34A3 3 0 105 10.9l1.41-1.41L5 8.07 3.9 9.17 2.5 7.77A5 5 0 013.9 12zM20.1 12a5 5 0 01-7.07 7.07l-1.41-1.41 1.41-1.41 1.41 1.41A3 3 0 1020 13.1l-1.41 1.41L19 15.93l1.1-1.1 1.4 1.4A5 5 0 0120.1 12z"/></svg>
-          </div></a>
-          <h4 class="title"><a href="https://github.com/Ahtesham-Ibne-Mostafa/Machine_Etymology" target="_blank">Machine Learning Repository</a></h4>
-           <p class="description" style="color:#fff;"> The github repository contains machine learning practices of mine.</p>
-         </div>
-      </div>
+
+      <!-- Example responsive table (merged rows/cols, multi-line content) -->
+     <div class="table-wrap">
+       <table class="cv-table" aria-label="Links and notes">
+         <thead>
+           <tr>
+             <th>Item</th>
+             <th>Details</th>
+             <th>Link</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td rowspan="2"><strong>Resume</strong></td>
+             <td>
+               Latest resume — includes projects, thesis and contact details.
+               <p style="margin:6px 0 0;">Format: PDF. Updated Oct 2025.</p>
+             </td>
+             <td><a href="https://drive.google.com/..." target="_blank" rel="noopener">Download</a></td>
+           </tr>
+           <tr>
+             <td colspan="2">
+               Notes: I accept internship opportunities — email is best. Short paragraph here describing availability and preferred roles.
+             </td>
+           </tr>
+           <tr>
+             <td><strong>Projects</strong></td>
+             <td>Selected repos: University Management, MiniVSFS, CARE4ALL.</td>
+             <td><a href="https://github.com/Ahtesham-Ibne-Mostafa" target="_blank" rel="noopener">GitHub</a></td>
+           </tr>
+           <tr>
+             <td><strong>Contact</strong></td>
+             <td>Phone / Email / Discord (server link)</td>
+             <td><a href="#contacts">Contact section</a></td>
+           </tr>
+         </tbody>
+       </table>
+     </div>
     </div>
   </section> <!--End Links Section -->
 
@@ -664,7 +688,7 @@
       <div class="col-12">
         <div class="page-meta" id="page-meta" aria-live="polite">
           <p id="modified-text">Last modified: 2.03pm, 23-10-2025</p>
-          <p>Page link: <a id="page-link" href="https://github.com/Ahtesham-Ibne-Mostafa/Ahtesham-Ibne-Mostafa.github.io/tree/main" target="Github" rel="noopener noreferrer">View on GitHub</a></p>
+          <p>Page link: <a id="page-link" href="https://github.com/Ahtesham-Ibne-Mostafa/Ahtesham-Ibne-Mostafa.github.io" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
         </div>
       </div>
     </div>
@@ -697,6 +721,25 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <script>
+    (function () {
+      var modEl = document.getElementById('modified-text');
+      var linkEl = document.getElementById('page-link');
+      var mod = document.lastModified || '';
+      var parsed = new Date(mod);
+      var modText = (parsed && !isNaN(parsed)) ? parsed.toLocaleString() : (mod || 'Unknown');
+      if (modEl) modEl.textContent = 'Last modified: ' + modText;
+    //    if (linkEl) {
+    //      linkEl.href = window.location.href;
+    //      linkEl.textContent = window.location.href;
+    //    }
++    // keep the page link pointing to the GitHub repo
++    if (linkEl) {
++      var repoUrl = 'https://github.com/Ahtesham-Ibne-Mostafa/Ahtesham-Ibne-Mostafa.github.io';
++      linkEl.href = repoUrl;
++      linkEl.textContent = 'View on GitHub';
++    }
+    })();
+  </script>
 </body>
-
 </html>
