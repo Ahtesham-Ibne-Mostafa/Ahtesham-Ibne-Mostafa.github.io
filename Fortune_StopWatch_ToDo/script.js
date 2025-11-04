@@ -57,7 +57,7 @@ function applyTheme(theme) {
     fortuneBox.style.fontFamily = theme.fontFamily;
 }
 
-// Add event listeners to the color buttons
+// event listeners to the color buttons
 document.getElementById("green").addEventListener("click", function () {
     applyTheme(themes[0]);
 });
