@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fortune Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar" style="background-color: #00422e;">
+      <button onclick="window.location.href='index.html'" style="background-color: #555;">Fortune</button>
+      <button onclick="window.location.href='stopwatch.html'" style="background-color: inherit;">Stopwatch</button>
+      <button onclick="window.location.href='todo.html'" style="background-color: inherit;">To-Do List</button>
+    </nav>
+  </header>
+
+  <div class="fortune-container">
+    <div id="fortune-box"></div>
+    <div class="color-buttons">
+      <button class="color-btn" id="green"></button>
+      <button class="color-btn" id="yellow"></button>
+      <button class="color-btn" id="blue"></button>
+      <button class="color-btn" id="orange"></button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

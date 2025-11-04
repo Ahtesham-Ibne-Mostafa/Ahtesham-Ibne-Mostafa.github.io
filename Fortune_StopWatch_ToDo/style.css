@@ -1,0 +1,146 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    text-align: center;
+  }
+  
+  /* Header Navigation */
+  .navbar {
+    background-color: #333;
+    padding: 10px;
+  }
+  
+  .navbar button {
+    margin: 0 8px;
+    padding: 8px 15px;
+    color: white;
+    background-color: #555;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .navbar button:hover {
+    background-color: #777;
+  }
+  
+  /* Fortune Box */
+  .fortune-container {
+    margin-top: 120px;
+  }
+  
+  #fortune-box {
+    display: inline-block;
+    padding: 12px 25px;
+    border: 2px solid green;
+    background-color: #ffe680;
+    color: #b30000;
+    font-size: 16px;
+    border-radius: 4px;
+    min-width: 400px;
+    margin-bottom: 10px;
+    transition: all 0.4s ease;
+  }
+  
+  .color-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .color-btn {
+    width: 25px;
+    height: 25px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  #green { background-color: #8bc34a; }
+  #yellow { background-color: #ffeb3b; }
+  #blue { background-color: #2196f3; }
+  #orange { background-color: #ff9800; }
+  
+  /* Stopwatch */
+  .stopwatch-container {
+    margin-top: 100px;
+  }
+  
+  #display {
+    font-size: 2em;
+    margin: 20px;
+    background: white;
+    padding: 15px 40px;
+    border-radius: 8px;
+    display: inline-block;
+    border: 2px solid #333;
+  }
+  
+  .controls button {
+    margin: 8px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background-color: #555;
+    color: white;
+    font-size: 1em;
+  }
+  
+  .controls button:hover {
+    background-color: #777;
+  }
+  
+  /* To-Do */
+  .todo-container {
+    margin-top: 100px;
+  }
+  
+  #taskInput {
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  
+  #addTask {
+    padding: 10px 15px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #addTask:hover {
+    background-color: #45a049;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
+  
+  li {
+    background: #fff;
+    margin: 8px auto;
+    padding: 10px 15px;
+    border-radius: 5px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #ccc;
+  }
+  
+  li button {
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
