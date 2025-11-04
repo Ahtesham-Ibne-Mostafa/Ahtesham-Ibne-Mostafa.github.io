@@ -17,8 +17,9 @@
   </header>
 
   <div class="stopwatch-container">
-    <h2>Stopwatch (3-Second Steps)</h2>
+    <h2>Stopwatch (3-Second Display Steps)</h2>
     <div id="display">0 s</div>
+    <div id="message" style="margin-top: 10px; color: red; font-weight: bold;"></div> <!-- Message container -->
     <div class="controls">
       <button id="start">Start</button>
       <button id="stop">Stop</button>
@@ -28,37 +29,49 @@
 
   <script>
     "use strict";
-    let time = 0;
+
+    let time = 0; // Internal time in seconds
     let timer = null;
 
     const display = document.getElementById("display");
+    const message = document.getElementById("message"); // Message container
 
-    document.getElementById("start").addEventListener("click", function() {
+    // Function to start or restart the timer
+    function startTimer() {
       if (!timer) {
+        message.textContent = ""; // Clear any previous message
         timer = setInterval(() => {
-          if (time < 30) {
-            time += 3;
-            display.textContent = time + " s";
-            console.log("Time:", time);
-          } else {
-            clearInterval(timer);
-            timer = null;
-            alert("Timer reached 30 seconds!");
+          time++; // Increment internal time by 1 second
+          const displayTime = time * 3; // Display time is 3x the internal time
+          display.textContent = displayTime + " s";
+
+          if (displayTime >= 30) { // Restart when display time reaches 30
+            time = 0; // Reset internal time
+            message.textContent = "Timer restarted!"; // Display restart message
           }
-        }, 3000);
+        }, 1000); // Increment every 1 second
       }
+    }
+
+    // Start button functionality
+    document.getElementById("start").addEventListener("click", function () {
+      startTimer();
     });
 
-    document.getElementById("stop").addEventListener("click", function() {
+    // Stop button functionality
+    document.getElementById("stop").addEventListener("click", function () {
       clearInterval(timer);
       timer = null;
     });
 
-    document.getElementById("reset").addEventListener("click", function() {
+    // Reset button functionality
+    document.getElementById("reset").addEventListener("click", function () {
       clearInterval(timer);
       timer = null;
       time = 0;
       display.textContent = "0 s";
+      message.textContent = ""; // Clear the message
+      startTimer(); // Automatically restart the timer
     });
   </script>
 </body>

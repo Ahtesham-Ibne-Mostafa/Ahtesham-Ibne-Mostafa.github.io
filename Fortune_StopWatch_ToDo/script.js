@@ -13,41 +13,72 @@ const fortunes = [
     "Happiness is coming your way."
 ];
 
-// Pick a random fortune
-const fortuneBox = document.getElementById("fortune-box");
-const randomIndex = Math.floor(Math.random() * fortunes.length);
-fortuneBox.textContent = fortunes[randomIndex];
-console.log("Selected Fortune:", fortunes[randomIndex]);
+// Themes for the fortune box
+const themes = [
+    {
+        backgroundColor: "#12d640",
+        color: "#fff",
+        borderColor: "#ee0000ff",
+        fontFamily: "Arial, sans-serif"
+    },
+    {
+        backgroundColor: "#f1c40f",
+        color: "#000",
+        borderColor: "#00aaffff",
+        fontFamily: "Georgia, serif"
+    },
+    {
+        backgroundColor: "#3498db",
+        color: "#fff",
+        borderColor: "#ff9900ff",
+        fontFamily: "'Courier New', monospace"
+    },
+    {
+        backgroundColor: "#e67e22",
+        color: "#fff",
+        borderColor: "#00ff00ff",
+        fontFamily: "'Times New Roman', Times, serif"
+    }
+];
 
-// Button actions
+// Function to change the fortune
+function changeFortune() {
+    const randomIndex = Math.floor(Math.random() * fortunes.length);
+    const fortuneBox = document.getElementById("fortune-box");
+    fortuneBox.textContent = fortunes[randomIndex];
+}
+
+// Function to apply a theme to the fortune box
+function applyTheme(theme) {
+    const fortuneBox = document.getElementById("fortune-box");
+    fortuneBox.style.backgroundColor = theme.backgroundColor;
+    fortuneBox.style.color = theme.color;
+    fortuneBox.style.borderColor = theme.borderColor;
+    fortuneBox.style.fontFamily = theme.fontFamily;
+}
+
+// Add event listeners to the color buttons
 document.getElementById("green").addEventListener("click", function () {
-  fortuneBox.style.color = "#1b5e20";
-  fortuneBox.style.backgroundColor = "#e8f5e9";
-  fortuneBox.style.borderColor = "#388e3c";
-  fortuneBox.style.fontFamily = "'Georgia', serif";
-  fortuneBox.style.fontSize = "17px";
+    applyTheme(themes[0]);
 });
-
 document.getElementById("yellow").addEventListener("click", function () {
-  fortuneBox.style.color = "#f57f17";
-  fortuneBox.style.backgroundColor = "#fff9c4";
-  fortuneBox.style.borderColor = "#fbc02d";
-  fortuneBox.style.fontFamily = "'Comic Sans MS', cursive";
-  fortuneBox.style.fontSize = "16px";
+    applyTheme(themes[1]);
 });
-
 document.getElementById("blue").addEventListener("click", function () {
-  fortuneBox.style.color = "#0d47a1";
-  fortuneBox.style.backgroundColor = "#e3f2fd";
-  fortuneBox.style.borderColor = "#1976d2";
-  fortuneBox.style.fontFamily = "'Courier New', monospace";
-  fortuneBox.style.fontSize = "15px";
+    applyTheme(themes[2]);
+});
+document.getElementById("orange").addEventListener("click", function () {
+    applyTheme(themes[3]);
 });
 
-document.getElementById("orange").addEventListener("click", function () {
-  fortuneBox.style.color = "#e65100";
-  fortuneBox.style.backgroundColor = "#fff3e0";
-  fortuneBox.style.borderColor = "#fb8c00";
-  fortuneBox.style.fontFamily = "'Trebuchet MS', sans-serif";
-  fortuneBox.style.fontSize = "18px";
+// Add event listener to the Random button
+document.getElementById("random-btn").addEventListener("click", function () {
+    // Pick a random fortune
+    changeFortune();
+    // Pick a random theme
+    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+    applyTheme(randomTheme);
 });
+
+// Initialize with a random fortune on page load
+changeFortune();
