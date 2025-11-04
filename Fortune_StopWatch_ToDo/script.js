@@ -13,7 +13,7 @@ const fortunes = [
     "Happiness is coming your way."
 ];
 
-// Themes for the fortune box
+
 const themes = [
     {
         backgroundColor: "#12d640",
@@ -41,14 +41,14 @@ const themes = [
     }
 ];
 
-// Function to change the fortune
+
 function changeFortune() {
     const randomIndex = Math.floor(Math.random() * fortunes.length);
     const fortuneBox = document.getElementById("fortune-box");
     fortuneBox.textContent = fortunes[randomIndex];
 }
 
-// Function to apply a theme to the fortune box
+
 function applyTheme(theme) {
     const fortuneBox = document.getElementById("fortune-box");
     fortuneBox.style.backgroundColor = theme.backgroundColor;
@@ -57,7 +57,7 @@ function applyTheme(theme) {
     fortuneBox.style.fontFamily = theme.fontFamily;
 }
 
-// event listeners to the color buttons
+
 document.getElementById("green").addEventListener("click", function () {
     applyTheme(themes[0]);
 });
@@ -71,14 +71,14 @@ document.getElementById("orange").addEventListener("click", function () {
     applyTheme(themes[3]);
 });
 
-// Add event listener to the Random button
+
 document.getElementById("random-btn").addEventListener("click", function () {
-    // Pick a random fortune
+
     changeFortune();
-    // Pick a random theme
+
     const randomTheme = themes[Math.floor(Math.random() * themes.length)];
     applyTheme(randomTheme);
 });
 
-// Initialize with a random fortune on page load
+
 changeFortune();
