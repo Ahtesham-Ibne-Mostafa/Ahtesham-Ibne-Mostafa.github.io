@@ -30,7 +30,7 @@
   <script>
     "use strict";
 
-    let time = 0; // Internal time in seconds
+    let time = 0; 
     let timer = null;
 
     const display = document.getElementById("display");
@@ -39,39 +39,37 @@
     // Function to start or restart the timer
     function startTimer() {
       if (!timer) {
-        message.textContent = ""; // Clear any previous message
+        message.textContent = ""; 
         timer = setInterval(() => {
-          time++; // Increment internal time by 1 second
-          const displayTime = time * 3; // Display time is 3x the internal time
+          time++; 
+          const displayTime = time * 3; 
           display.textContent = displayTime + " s";
 
-          if (displayTime >= 30) { // Restart when display time reaches 30
-            time = 0; // Reset internal time
-            message.textContent = "Timer restarted!"; // Display restart message
+          if (displayTime >= 30) { 
+            time = 0; 
+            message.textContent = "Timer restarted!"; 
           }
-        }, 1000); // Increment every 1 second
+        }, 1000); 
       }
     }
 
-    // Start button functionality
     document.getElementById("start").addEventListener("click", function () {
       startTimer();
     });
 
-    // Stop button functionality
+
     document.getElementById("stop").addEventListener("click", function () {
       clearInterval(timer);
       timer = null;
     });
 
-    // Reset button functionality
     document.getElementById("reset").addEventListener("click", function () {
       clearInterval(timer);
       timer = null;
       time = 0;
       display.textContent = "0 s";
-      message.textContent = ""; // Clear the message
-      startTimer(); // Automatically restart the timer
+      message.textContent = ""; 
+      startTimer(); 
     });
   </script>
 </body>
