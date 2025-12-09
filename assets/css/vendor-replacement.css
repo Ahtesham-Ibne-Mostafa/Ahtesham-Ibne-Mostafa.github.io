@@ -1,0 +1,172 @@
+/* Minimal, safe vendor-replacement stylesheet */
+
+/* global reset and box-sizing */
+* { box-sizing: border-box; }
+html,body { margin:0; padding:0; font-family: 'Open Sans', system-ui, Arial, sans-serif; color: #fff; background: #000; }
+
+/* Images */
+.img-fluid { max-width: 100%; height: auto; display: block; }
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Row / Columns - use gap instead of negative margins */
+.row { display: flex; flex-wrap: wrap; gap: 20px; align-items: stretch; }
+.col-lg-4 { flex: 0 0 33.3333%; max-width: 33.3333%; padding: 0 8px; }
+.col-lg-12 { flex: 0 0 100%; max-width: 100%; padding: 0 8px; }
+.col-md-6 { flex: 0 0 50%; max-width: 50%; padding: 0 8px; }
+.col-md-4 { flex: 0 0 33.3333%; max-width: 33.3333%; padding: 0 8px; }
+
+/* Helpers */
+.d-flex { display:flex !important; }
+.justify-content-center { justify-content:center !important; }
+.align-items-stretch { align-items:stretch !important; }
+.mt-4 { margin-top: 1rem !important; }
+.mt-md-0 { margin-top: 0 !important; }
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .col-lg-4, .col-lg-12 { flex: 0 0 100%; max-width: 100%; }
+}
+@media (max-width: 768px) {
+  .col-md-6 { flex: 0 0 100%; max-width: 100%; }
+}
+
+/* Nav */
+.nav-menu { display:flex; gap:12px; list-style:none; padding:0; margin:0; align-items:center; }
+.nav-menu ul { display:flex; gap:12px; list-style:none; padding:0; margin:0; }
+.nav-menu a { color:#fff; text-decoration:none; padding:6px 8px; display:inline-block; }
+.nav-menu .active a { color:#12d640; }
+
+/* Portfolio filters */
+#portfolio-flters { list-style:none; padding:0; margin:0; display:flex; gap:8px; flex-wrap:wrap; }
+#portfolio-flters li { cursor:pointer; padding:6px 10px; background:#f0f0f0; border-radius:4px; color:#000; }
+#portfolio-flters li.filter-active { background:#12d640; color:#fff; }
+
+/* Portfolio items */
+.portfolio-item { box-sizing:border-box; padding:10px; transition: opacity .25s ease, transform .15s ease; }
+.portfolio-wrap { background:#111; padding:12px; color:#fff; display:flex; flex-direction:column; height:100%; }
+
+/* Lightbox */
+.vr-lightbox { position: fixed; left:0; top:0; right:0; bottom:0; background: rgba(0,0,0,.85); display:none; align-items:center; justify-content:center; z-index:2000; }
+.vr-lightbox.open { display:flex; }
+.vr-lightbox img { max-width: 95vw; max-height: 90vh; box-shadow: 0 4px 30px rgba(0,0,0,0.7); border-radius:4px; }
+.vr-lightbox .close-btn { position: absolute; top: 18px; right: 18px; color:#fff; font-size:24px; cursor:pointer; }
+
+/* Header / socials */
+.header-tops { padding: 18px 0; background:#0b0b0b; color:#fff; }
+.social-links a { display:inline-block; margin-left:6px; color:#fff; text-decoration:none; }
+
+/* Header fix: prevent name clipping and avoid nav overlap */
+.header-tops {
+  padding: 18px 0 !important;
+  overflow: visible !important;
+}
+
+.header-tops .container {
+  display: flex;
+  align-items: center;        /* vertically center title + nav */
+  gap: 16px;
+  flex-wrap: wrap;           /* allow nav to wrap on narrow screens */
+}
+
+/* ensure title and subtitle use full line-height and aren't cropped */
+.header-tops h1,
+.header-tops h2 {
+  margin: 0;
+  line-height: 1.2 !important;
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  overflow: visible !important;
+}
+
+/* reserve room for nav so it doesn't compress the name */
+.nav-menu {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 240px;   /* increase if you need more room */
+  flex-wrap: wrap;
+}
+
+/* keep nav links compact but readable */
+.nav-menu a {
+  padding: 6px 10px;
+  white-space: nowrap;
+  font-size: 0.95rem;
+}
+
+/* on small screens allow title to wrap and nav to center */
+@media (max-width: 768px) {
+  .header-tops .container { justify-content: center; }
+  .nav-menu { min-width: 0; width: 100%; justify-content: center; margin-top: 8px; }
+  .header-tops h1, .header-tops h2 { white-space: normal; text-align: center; }
+}
+
+/* Small accessibility tweaks */
+a[role="button"], button { cursor: pointer; }
+
+.page-meta {
+  text-align: center;
+  color: #cbd5c8;
+  font-size: 0.95rem;
+  margin: 12px 0 32px;
+}
+.page-meta a {
+  color: #12d640;
+  word-break: break-all;
+  text-decoration: none;
+}
+.page-meta a:hover { text-decoration: underline; }
+
+/* Responsive table wrapper */
+.table-wrap { width: 100%; overflow-x: auto; margin: 18px 0; -webkit-overflow-scrolling: touch; }
+
+/* Table base */
+.cv-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px; /* makes it horizontally scroll on small screens */
+  font-size: 0.95rem;
+  background: #0b0b0b;
+  color: #e6e6e6;
+}
+
+/* Header */
+.cv-table thead th {
+  background: #121212;
+  color: #12d640;
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 2px solid rgba(255,255,255,0.06);
+}
+
+/* Body rows and cells */
+.cv-table tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: top;
+}
+
+/* Striped rows */
+.cv-table tbody tr:nth-child(odd) { background: rgba(18,214,64,0.02); }
+.cv-table tbody tr:nth-child(even) { background: transparent; }
+
+/* Hover effect */
+.cv-table tbody tr:hover { background: rgba(18,214,64,0.04); transform: translateY(-1px); transition: background .15s, transform .12s; }
+
+/* Links inside table */
+.cv-table a { color: #a7ffbf; text-decoration: none; }
+.cv-table a:hover { text-decoration: underline; }
+
+/* Small screens — reduce padding */
+@media (max-width: 640px) {
+  .cv-table thead th, .cv-table tbody td { padding: 10px 8px; font-size: 0.9rem; }
+}
