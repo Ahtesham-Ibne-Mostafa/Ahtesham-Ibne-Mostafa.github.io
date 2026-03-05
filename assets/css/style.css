@@ -15,6 +15,19 @@ body {
   background: transparent;
 }
 
+
+.edu-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+  display: block;
+  margin: 0 auto 15px auto;
+}
+
 .quote {
   font-style: italic;
   font-size: 1.1rem;
@@ -1116,3 +1129,49 @@ section .container {
     transform: translateX(-50%);
   }
 }
+
+/* Fix navbar name cropping */
+#header.header-top {
+  height: 110px !important;  /* was 90px */
+}
+``
+
+#header.header-top h1 {
+  font-size: 30px !important;
+  white-space: nowrap;
+}
+
+#header.header-top h1 a {
+  overflow: visible !important;
+}
+
+/* Proper spacing for header name and menu without overlap */
+#header h1 {
+  padding-top: 30px;
+  padding-bottom: 10px;
+}
+
+/* When header shrinks */
+#header.header-top h1 {
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+/* Move navbar down safely */
+#header .nav-menu {
+  margin-top: 25px;
+}
+
+/* Prevent overlap (forces layers to not collide) */
+#header h1,
+#header .nav-menu {
+  position: relative;
+  z-index: 10;
+}
+
+/* Increase gap between name and navbar */
+#header .nav-menu {
+  margin-top: 60px !important;   /* Increase from 25px → 45px */
+}
+
+
