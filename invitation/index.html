@@ -75,75 +75,61 @@ a{color:inherit}
 .btn.solid:hover{filter:brightness(1.07)}
 .actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
 
-/* ------------ INTRO (envelope) ------------ */
+/* ------------ INTRO (cream envelope) ------------ */
 #intro{
-  position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:
-    radial-gradient(70% 55% at 50% 40%, var(--em-700), var(--em-900) 70%, var(--em-950));
-  transition:opacity .9s ease, visibility .9s;
-  padding:24px;
+  position:fixed;top:0;left:0;bottom:0;width:100vw;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(70% 55% at 50% 40%, var(--em-700), var(--em-900) 70%, var(--em-950));padding:0;overflow:hidden;cursor:pointer;
+  transition:opacity 1s ease, visibility 1s;
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
 #intro.leave{opacity:0;visibility:hidden;pointer-events:none}
-#intro .stars span{position:absolute;color:var(--gold);opacity:.5;animation:tw 3.2s ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:.9;transform:scale(1.2)}}
-.intro-top{text-align:center;margin-bottom:34px;animation:fadeUp 1s ease both}
-.intro-top .ar{font-family:'Amiri',serif;color:var(--gold);font-size:clamp(26px,7vw,36px)}
-.intro-top .eyebrow{margin-top:6px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes popIn{0%{opacity:0;transform:scale(.6) translateY(30px)}70%{transform:scale(1.04)}100%{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes softBlink{50%{opacity:.5}}
 
-.env-wrap{animation:popIn 1.1s .25s cubic-bezier(.2,.9,.3,1.2) both}
 .env{
-  position:relative;width:min(84vw,400px);aspect-ratio:1.45;cursor:pointer;
-  perspective:1000px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
+  position:relative;width:min(100%,540px);aspect-ratio:386/265;perspective:1200px;
+  background:linear-gradient(180deg,#f4ebdb,#f1e7d5);
+  border-top:1px solid #cdb584;
+  box-shadow:0 30px 50px rgba(0,0,0,.55);
+  animation:fadeUp .9s ease both;outline:none;
 }
-.env .back{position:absolute;inset:0;background:#0b2b23;border-radius:8px;box-shadow:0 30px 50px rgba(0,0,0,.55)}
-.env .letter{
-  position:absolute;left:6%;right:6%;top:6%;height:88%;border-radius:6px;z-index:2;
-  background:linear-gradient(180deg,#fffaf0,var(--ivory));color:var(--ink);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-  border:1px solid var(--gold);outline:1px solid rgba(169,138,82,.45);outline-offset:-7px;
-  transition:transform 1s cubic-bezier(.4,.1,.2,1);will-change:transform;
-}
-.letter .a{font-family:'Amiri',serif;color:var(--gold-lo);font-size:18px}
-.letter .t{font-family:'Jost',sans-serif;letter-spacing:.28em;font-size:8px;text-transform:uppercase;margin:4px 0 8px;color:#5a6b64}
-.letter .n{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(19px,5.2vw,25px);letter-spacing:.07em;color:var(--em-700);line-height:1.35}
-.pocket{position:absolute;inset:0;z-index:3;pointer-events:none}
-.pocket div{position:absolute;inset:0;border-radius:8px}
-.pocket .l{background:#12423a;-webkit-clip-path:polygon(0 0,52% 52%,0 100%);clip-path:polygon(0 0,52% 52%,0 100%)}
-.pocket .r{background:#12423a;-webkit-clip-path:polygon(100% 0,48% 52%,100% 100%);clip-path:polygon(100% 0,48% 52%,100% 100%)}
-.pocket .b{background:#0f372f;-webkit-clip-path:polygon(0 100%,50% 42%,100% 100%);clip-path:polygon(0 100%,50% 42%,100% 100%)}
-.flap{
-  position:absolute;left:0;right:0;top:0;height:56%;z-index:4;
-  background:linear-gradient(180deg,#1a5648,#154a3e);
+.env:focus-visible{outline:2px solid #b89a5e;outline-offset:4px}
+.env .inside{
+  position:absolute;left:0;right:0;top:0;height:53%;z-index:1;
+  background:linear-gradient(180deg,#e7dbc2,#efe4cf);
   -webkit-clip-path:polygon(0 0,100% 0,50% 100%);clip-path:polygon(0 0,100% 0,50% 100%);
-  transform-origin:top center;transition:transform .9s cubic-bezier(.45,.05,.25,1);will-change:transform;
 }
+.env .lines{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.env .flap{
+  position:absolute;left:0;right:0;top:0;height:53%;z-index:4;
+  transform-origin:top center;transition:transform 1s cubic-bezier(.45,.05,.25,1);
+  -webkit-backface-visibility:hidden;backface-visibility:hidden;
+  filter:drop-shadow(0 4px 5px rgba(120,90,40,.16));will-change:transform;
+}
+.env .flap svg{display:block;width:100%;height:100%}
 .seal{
-  position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);z-index:6;
-  width:clamp(96px,29vw,118px);aspect-ratio:1;border-radius:50%;padding:2px;
-  background:radial-gradient(circle at 35% 30%,var(--gold-hi),var(--gold) 45%,var(--gold-lo));
-  box-shadow:0 4px 14px rgba(0,0,0,.5), inset 0 -3px 6px rgba(0,0,0,.25);
-  display:grid;place-items:center;color:var(--em-900);
-  font-family:'Great Vibes',cursive;font-size:clamp(22px,6vw,28px);
-  animation:pulse 2.2s ease-in-out infinite;transition:opacity .4s, transform .4s;
+  position:absolute;left:50%;top:53%;z-index:6;
+  font-size:clamp(72px,21vw,92px);width:1em;height:1em;border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:linear-gradient(135deg,#b8995f 0%,#dcc695 32%,#a98a57 66%,#c9ad78 100%);
+  box-shadow:0 8px 18px rgba(90,65,25,.35),inset 0 0 0 1px rgba(255,255,255,.28);
+  transition:opacity .45s ease,transform .45s ease;
 }
-@keyframes pulse{0%,100%{box-shadow:0 4px 14px rgba(0,0,0,.5),0 0 0 0 rgba(217,191,140,.5)}50%{box-shadow:0 4px 14px rgba(0,0,0,.5),0 0 0 14px rgba(217,191,140,0)}}
-.env-label{
-  position:absolute;left:0;right:0;bottom:3.5%;z-index:5;text-align:center;pointer-events:none;
+.seal::before{content:"";position:absolute;inset:.085em;border-radius:50%;border:1px solid rgba(255,250,240,.38)}
+.seal span{
+  position:absolute;left:50%;top:50%;font-family:'Cormorant Garamond','Cinzel',serif;font-weight:500;
+  font-size:.46em;line-height:1;color:#fffaf0;text-shadow:0 1px 1px rgba(80,55,20,.25);
 }
-.env-label .eyebrow{color:var(--gold-hi);font-size:9.5px}
-.tap{
-  margin-top:34px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
-  animation:fadeUp 1s 1.2s both, blink 2.4s 2.2s ease-in-out infinite;
+.seal .r{transform:translate(-50%,-50%) translate(.14em,-.30em)}
+.seal .s{transform:translate(-50%,-50%) translate(-.16em,.2em)}
+.tap-note{
+  position:relative;margin-top:clamp(44px,9vh,80px);padding:0 16px;text-align:center;
+  font-family:'Cinzel',serif;font-weight:400;font-size:clamp(11px,3.6vw,15px);letter-spacing:.14em;color:var(--gold);
+  animation:fadeUp 1s .4s both, softBlink 2.8s 1.6s ease-in-out infinite;transition:opacity .4s ease;
 }
-@keyframes blink{50%{opacity:.35}}
-
 .env.open .flap{transform:rotateX(180deg)}
-.env.out .flap{z-index:1}
-.env.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.4)}
-.env.open .env-label{opacity:0;transition:opacity .3s}
-.env.out .letter{transform:translateY(-60%) scale(1.03)}
+.env.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.5)}
+#intro.opening .tap-note{animation:none;opacity:0}
 
 /* ------------ MAIN ------------ */
 main{position:relative;z-index:1;opacity:0;transition:opacity 1.2s ease}
@@ -296,111 +282,165 @@ footer{
   .hero-date{margin-top:26px}
   .scroll-cue{margin-top:24px}
   .scroll-cue::after{height:30px}
-  .intro-top{margin-bottom:22px}
-  .tap{margin-top:24px}
   .cb{min-width:64px}
 }
-@media (prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  .rv{opacity:1;transform:none}
+
+
+/* ===================== v3: glitter, floating card, music, smooth opening ===================== */
+#glitter{position:fixed;inset:0;z-index:200;pointer-events:none}
+.orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orbs i{position:absolute;border-radius:50%;filter:blur(46px);background:radial-gradient(circle,rgba(217,191,140,.26),transparent 70%);animation:drift 20s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(30px,-50px,0) scale(1.18)}}
+
+/* ---- floating hero card ---- */
+body.ready .arch{animation:archIn 1.5s cubic-bezier(.2,.8,.2,1) .55s both, floaty 7s ease-in-out 2.1s infinite;will-change:translate,transform;backface-visibility:hidden}
+@keyframes archIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+@keyframes floaty{0%,100%{translate:0 0}50%{translate:0 -14px}}
+.arch{box-shadow:0 0 0 7px rgba(217,191,140,.07),0 50px 90px rgba(0,0,0,.55),0 0 70px rgba(217,191,140,.12),inset 0 0 90px rgba(217,191,140,.05)}
+.crest{position:absolute;top:22px;left:50%;width:38px;height:38px;margin-left:-19px;animation:spin 24s linear infinite;opacity:.9}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---- shimmering gold names ---- */
+.names{
+  background:linear-gradient(100deg,#d9bf8c 0%,#f0dfb8 35%,#fffbe9 50%,#f0dfb8 65%,#d9bf8c 100%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:none;filter:drop-shadow(0 2px 14px rgba(217,191,140,.35));animation:goldflow 6s linear infinite;
 }
+.names .amp{-webkit-text-fill-color:var(--gold);color:var(--gold)}
+@keyframes goldflow{to{background-position:-250% 0}}
+
+/* ---- button shimmer ---- */
+.btn.solid{position:relative;overflow:hidden}
+.btn.solid::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:btnshine 4.5s ease-in-out infinite}
+@keyframes btnshine{0%,60%{left:-60%}100%{left:130%}}
+
+/* ---- section polish ---- */
+.card{transition:transform .5s ease, box-shadow .5s ease}
+.card:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(0,0,0,.4),0 0 40px rgba(217,191,140,.1)}
+.bigdate .day{filter:drop-shadow(0 0 18px rgba(217,191,140,.35))}
+
+/* ---- music button ---- */
+.music{
+  position:fixed;right:16px;bottom:16px;z-index:300;width:48px;height:48px;border-radius:50%;
+  border:1px solid var(--gold);background:rgba(4,20,15,.72);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:grid;place-items:center;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.45);
+  opacity:0;transform:scale(.6);transition:opacity .8s ease, transform .8s ease;
+}
+.music.show{opacity:1;transform:none}
+.music:hover{background:rgba(217,191,140,.15)}
+.eq{display:flex;align-items:flex-end;gap:3px;height:18px}
+.eq i{width:3px;height:6px;background:var(--gold-hi);border-radius:2px}
+.music.on .eq i{animation:eq 1s ease-in-out infinite}
+.music.on .eq i:nth-child(2){animation-delay:-.3s}.music.on .eq i:nth-child(3){animation-delay:-.6s}.music.on .eq i:nth-child(4){animation-delay:-.15s}
+@keyframes eq{0%,100%{height:5px}50%{height:18px}}
+.music:not(.on)::after{content:"";position:absolute;width:26px;height:1.5px;background:var(--gold-hi);transform:rotate(-45deg)}
+@media(max-width:480px){.crest{top:16px;width:30px;height:30px;margin-left:-15px}}
+
+/* ---- hero time: same size as the date line ---- */
+.hero-date .hero-time{margin-top:12px;gap:14px}
+.hero-date .hero-time em{font-size:1.45em;color:var(--gold)}
+.hero-date .hero-time b{display:inline;margin:0;font-size:1em;letter-spacing:.22em;color:var(--ivory);font-weight:400}
+.hero-date .hero-time::before,.hero-date .hero-time::after{width:30px}
+
+/* ---- bell: sound button, top right ---- */
+.music{top:max(14px,env(safe-area-inset-top));left:max(14px,env(safe-area-inset-left));right:auto;bottom:auto;width:46px;height:46px}
+.bell{width:24px;height:24px;transform-origin:50% 8%;overflow:visible}
+.bell path{fill:none;stroke:var(--gold-hi);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.music.on .bell{animation:ring 2.6s ease-in-out infinite}
+@keyframes ring{0%,55%,100%{transform:rotate(0)}6%{transform:rotate(16deg)}12%{transform:rotate(-14deg)}18%{transform:rotate(10deg)}24%{transform:rotate(-8deg)}30%{transform:rotate(4deg)}36%{transform:rotate(0)}}
+.music .wave{opacity:0;transition:opacity .4s}
+.music.on .wave{opacity:1}
+.music:not(.on)::after{width:30px}
+
+/* ---- contact card ---- */
+.contact{margin-top:44px}
+.contact .c-title{font-family:'Cinzel',serif;font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:clamp(17px,4.6vw,21px);color:var(--gold-hi);margin-top:10px}
+.contact .c-note{font-style:italic;font-size:clamp(17px,4.3vw,20px);color:var(--gold);margin-top:6px}
+.c-card{
+  max-width:420px;margin:22px auto 0;border:1px solid rgba(217,191,140,.5);border-radius:22px;padding:6px 8px;
+  background:linear-gradient(180deg,rgba(29,92,77,.22),rgba(4,20,15,.5));
+  box-shadow:0 18px 44px rgba(0,0,0,.35),inset 0 0 40px rgba(217,191,140,.04);
+}
+.crow{
+  display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;text-decoration:none;
+  color:var(--gold-hi);border-radius:16px;transition:background .3s ease,transform .3s ease;
+}
+.crow + .crow{border-top:1px solid rgba(217,191,140,.22)}
+.crow:hover{background:rgba(217,191,140,.08)}
+.crow .num{font-family:'Cinzel',serif;font-weight:500;font-size:clamp(17px,4.8vw,21px);letter-spacing:.1em;white-space:nowrap}
+.crow .tag{display:inline-flex;align-items:center;gap:7px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,4.2vw,19px);color:var(--gold);white-space:nowrap}
+.crow .tag svg{width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:360px){.crow{padding:14px 10px}.crow .num{letter-spacing:.05em}}
+
+/* ---- premium background: fine lattice + vignette + grain + hairline frame ---- */
+.pattern{
+  opacity:.13;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23d9bf8c' stroke-width='.6'%3E%3Crect x='22' y='22' width='56' height='56'/%3E%3Crect x='22' y='22' width='56' height='56' transform='rotate(45 50 50)'/%3E%3Ccircle cx='50' cy='50' r='19'/%3E%3Ccircle cx='50' cy='50' r='10'/%3E%3Cpath d='M0 -7L7 0L0 7L-7 0Z M100 -7L107 0L100 7L93 0Z M0 93L7 100L0 107L-7 100Z M100 93L107 100L100 107L93 100Z'/%3E%3Cpath d='M50 31V69M31 50H69' stroke-width='.4'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='2.2' fill='%23d9bf8c'/%3E%3C/svg%3E");
+  background-size:104px 104px;
+  -webkit-mask-image:radial-gradient(ellipse 85% 70% at 50% 42%,#000 25%,transparent 92%);
+  mask-image:radial-gradient(ellipse 85% 70% at 50% 42%,#000 25%,transparent 92%);
+}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(120% 90% at 50% 40%,transparent 45%,rgba(2,10,7,.55) 100%)}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.07;mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 .92  0 0 0 0 .75  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:220px 220px}
+.hairline{position:fixed;inset:10px;pointer-events:none;z-index:2;border:1px solid rgba(217,191,140,.2);
+  box-shadow:inset 0 0 0 4px transparent, inset 0 0 0 5px rgba(217,191,140,.07);opacity:0;transition:opacity 2s ease}
+body.ready .hairline{opacity:1}
+.hairline i{position:absolute;width:14px;height:14px;border:1px solid var(--gold);opacity:.7}
+.hairline i:nth-child(1){top:-1px;left:-1px;border-right:0;border-bottom:0}
+.hairline i:nth-child(2){top:-1px;right:-1px;border-left:0;border-bottom:0}
+.hairline i:nth-child(3){bottom:-1px;left:-1px;border-right:0;border-top:0}
+.hairline i:nth-child(4){bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+/* ---- glitter only after the envelope opens ---- */
+#glitter{opacity:0;transition:opacity 2.5s ease}
+#glitter.on{opacity:1}
+
+/* ---- music button (note icon) ---- */
+.note{width:22px;height:22px;overflow:visible}
+.note path,.note circle{fill:none;stroke:var(--gold-hi);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.music.on .note{animation:notebob 1.8s ease-in-out infinite}
+@keyframes notebob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-6deg)}}
+.music::before{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--gold);opacity:0;pointer-events:none}
+.music.on::before{animation:ripple 2.4s ease-out infinite}
+@keyframes ripple{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.55);opacity:0}}
 </style>
 </head>
 <body class="locked">
 
+<canvas id="glitter" aria-hidden="true"></canvas>
+<div class="orbs" aria-hidden="true">
+  <i style="width:340px;height:340px;left:-90px;top:8%"></i>
+  <i style="width:280px;height:280px;right:-80px;top:34%;animation-delay:-6s"></i>
+  <i style="width:380px;height:380px;left:18%;bottom:-120px;animation-delay:-11s"></i>
+  <i style="width:220px;height:220px;right:12%;top:-60px;animation-delay:-3s"></i>
+</div>
 <div class="glow"></div>
 <div class="pattern"></div>
+<div class="vignette"></div>
+<div class="grain"></div>
+<div class="hairline" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <!-- ============ INTRO ENVELOPE ============ -->
 <div id="intro" aria-label="Invitation envelope">
-  <div class="stars" aria-hidden="true">
-    <span style="top:12%;left:14%">✦</span><span style="top:20%;right:16%;animation-delay:-1s">✦</span>
-    <span style="bottom:18%;left:20%;animation-delay:-2s">✦</span><span style="bottom:12%;right:12%;animation-delay:-.5s">✦</span>
-    <span style="top:46%;left:6%;animation-delay:-1.6s;font-size:12px">✦</span><span style="top:40%;right:7%;animation-delay:-2.4s;font-size:12px">✦</span>
-  </div>
-
-  <div class="intro-top">
-    <div class="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-    <div class="eyebrow">You are invited</div>
-  </div>
-
-  <div class="env-wrap">
-    <div class="env" id="env" role="button" tabindex="0" aria-label="Open invitation">
-      <div class="back"></div>
-      <div class="letter">
-        <div class="a">بِسْمِ اللَّهِ</div>
-        <div class="t">Wedding Reception</div>
-        <div class="n">Ahtesham</div>
-        <div class="n" style="font-size:22px;color:var(--gold-lo)">&amp;</div>
-        <div class="n">Sabrina</div>
-      </div>
-      <div class="pocket"><div class="l"></div><div class="r"></div><div class="b"></div></div>
-      <div class="flap"></div>
-      <div class="env-label"><div class="eyebrow">Ahtesham &amp; Sabrina</div></div>
-      <div class="seal" aria-hidden="true">
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="100" cy="100" r="98" fill="#fffaf0"/>
-          <circle cx="100" cy="100" r="95" fill="#fbf1dc"/>
-          <circle cx="100" cy="100" r="91" fill="none" stroke="#d9bf8c" stroke-width="1.2"/>
-          <ellipse cx="106" cy="172" rx="46" ry="4" fill="#000" opacity=".08"/>
-          <!-- veil + bun -->
-          <path d="M128 50 Q160 60 154 132 L140 112Z" fill="#fff" opacity=".75" stroke="#e4e4e4" stroke-width="1"/>
-          <circle cx="141" cy="50" r="8" fill="#6b4a34"/>
-          <!-- bride gown -->
-          <path d="M114 104 Q126 98 138 104 L157 168 Q126 178 98 168Z" fill="#fffaf0" stroke="#e3d6bd" stroke-width="1.2"/>
-          <path d="M126 118 L124 170 M118 114 L108 168 M134 114 L142 170" stroke="#eadfc8" stroke-width=".9" fill="none"/>
-          <rect x="121" y="84" width="9" height="14" rx="4" fill="#f7d6b8"/>
-          <path d="M114 105 Q126 91 138 105 L138 108 Q126 100 114 108Z" fill="#f7d6b8"/>
-          <path d="M115 106 Q126 112 137 106 L136 123 Q126 127 116 123Z" fill="#fffaf0" stroke="#e3d6bd" stroke-width="1"/>
-          <path d="M116 123 Q126 127 136 123" stroke="#d9bf8c" stroke-width="2" fill="none"/>
-          <!-- groom legs, shoes -->
-          <rect x="68" y="138" width="9" height="29" rx="3" fill="#8c8f93"/><rect x="80" y="138" width="9" height="29" rx="3" fill="#8c8f93"/>
-          <ellipse cx="71" cy="168" rx="7.5" ry="3.6" fill="#2a2522"/><ellipse cx="88" cy="168" rx="7.5" ry="3.6" fill="#2a2522"/>
-          <!-- groom jacket -->
-          <path d="M60 100 Q60 90 78 90 Q96 90 96 100 L97 142 H59Z" fill="#a2a5a8" stroke="#7e8083" stroke-width="1"/>
-          <path d="M68 96 L78 138 L88 96 Q78 104 68 96Z" fill="#dcdcd4"/>
-          <path d="M72 91 L78 104 L84 91Z" fill="#fff"/>
-          <path d="M68 91 L73 114 L61 100Z M88 91 L83 114 L95 100Z" fill="#8e9194"/>
-          <circle cx="78" cy="114" r="1.4" fill="#888"/><circle cx="78" cy="124" r="1.4" fill="#888"/>
-          <path d="M73 92 l5 3 l5 -3 v6 l-5 -3 l-5 3z" fill="#2a2522"/>
-          <!-- arms -->
-          <path d="M62 100 Q51 114 60 128" fill="none" stroke="#a2a5a8" stroke-width="9" stroke-linecap="round"/>
-          <circle cx="61" cy="130" r="4.2" fill="#f7d6b8"/>
-          <path d="M94 100 Q104 112 108 126" fill="none" stroke="#a2a5a8" stroke-width="9" stroke-linecap="round"/>
-          <path d="M116 106 Q112 118 110 126" fill="none" stroke="#f7d6b8" stroke-width="6" stroke-linecap="round"/>
-          <circle cx="109" cy="128" r="4.6" fill="#f7d6b8"/>
-          <!-- groom head -->
-          <circle cx="59" cy="66" r="3.6" fill="#f2c8a6"/><circle cx="97" cy="66" r="3.6" fill="#f2c8a6"/>
-          <circle cx="78" cy="64" r="19" fill="#f7d6b8"/>
-          <path d="M58 62 Q56 40 78 40 Q100 40 98 62 Q96 50 88 48 Q82 54 70 52 Q62 52 58 62Z" fill="#6b4a34"/>
-          <circle cx="72" cy="66" r="2.7" fill="#2a1c16"/><circle cx="86" cy="66" r="2.7" fill="#2a1c16"/>
-          <circle cx="72.9" cy="65" r=".9" fill="#fff"/><circle cx="86.9" cy="65" r=".9" fill="#fff"/>
-          <path d="M68 60 q4 -2 7 0 M82 60 q4 -2 7 0" stroke="#5a3d2b" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-          <circle cx="66" cy="73" r="3.6" fill="#f2a39a" opacity=".6"/><circle cx="90" cy="73" r="3.6" fill="#f2a39a" opacity=".6"/>
-          <path d="M74 74 Q79 79 84 74" stroke="#9a4a3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <!-- bride head -->
-          <circle cx="125" cy="64" r="19" fill="#f7d6b8"/>
-          <path d="M105 62 Q104 38 125 38 Q146 38 145 62 Q142 50 134 48 Q128 54 116 52 Q108 52 105 62Z" fill="#6b4a34"/>
-          <ellipse cx="136" cy="44" rx="6" ry="3.2" fill="#9fd3e0" transform="rotate(-25 136 44)"/><ellipse cx="143" cy="42" rx="6" ry="3.2" fill="#9fd3e0" transform="rotate(25 143 42)"/><circle cx="139.5" cy="43.5" r="2" fill="#7fbccd"/>
-          <circle cx="118" cy="66" r="2.7" fill="#2a1c16"/><circle cx="132" cy="66" r="2.7" fill="#2a1c16"/>
-          <circle cx="117.1" cy="65" r=".9" fill="#fff"/><circle cx="131.1" cy="65" r=".9" fill="#fff"/>
-          <path d="M114 60 q4 -2 7 0 M128 60 q4 -2 7 0" stroke="#5a3d2b" stroke-width="1.3" fill="none" stroke-linecap="round"/>
-          <circle cx="112" cy="73" r="3.6" fill="#f2a39a" opacity=".6"/><circle cx="138" cy="73" r="3.6" fill="#f2a39a" opacity=".6"/>
-          <path d="M121 74 Q126 79 131 74" stroke="#9a4a3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-          <!-- bouquet + bride arm -->
-          <path d="M136 106 Q141 118 130 124" fill="none" stroke="#f7d6b8" stroke-width="6" stroke-linecap="round"/>
-          <path d="M127 126 L131 136 L135 126Z" fill="#fffaf0" stroke="#e3d6bd" stroke-width=".8"/>
-          <ellipse cx="124" cy="120" rx="6" ry="2.4" fill="#5f9a62" transform="rotate(-30 124 120)"/><ellipse cx="138" cy="120" rx="6" ry="2.4" fill="#5f9a62" transform="rotate(30 138 120)"/>
-          <circle cx="126" cy="113" r="4.6" fill="#f4cf4a"/><circle cx="134" cy="112" r="4.6" fill="#f7da6a"/><circle cx="131" cy="119" r="4.6" fill="#f4cf4a"/><circle cx="123" cy="119" r="3.8" fill="#fff"/><circle cx="139" cy="118" r="3.8" fill="#fff"/>
-          <circle cx="126" cy="113" r="1.4" fill="#e3a92c"/><circle cx="134" cy="112" r="1.4" fill="#e3a92c"/><circle cx="131" cy="119" r="1.4" fill="#e3a92c"/>
-          <circle cx="130" cy="123" r="4" fill="#f7d6b8"/>
-          <polygon points="94.0,35.5 95.2,38.4 98.3,38.6 95.9,40.6 96.6,43.6 94.0,42.0 91.4,43.6 92.1,40.6 89.7,38.6 92.8,38.4" fill="#d6322f"/><polygon points="105.0,25.2 106.5,28.9 110.5,29.2 107.5,31.8 108.4,35.7 105.0,33.6 101.6,35.7 102.5,31.8 99.5,29.2 103.5,28.9" fill="#d6322f"/><polygon points="116.0,34.8 117.1,37.5 120.0,37.7 117.8,39.6 118.5,42.4 116.0,40.9 113.5,42.4 114.2,39.6 112.0,37.7 114.9,37.5" fill="#d6322f"/>
-        </svg>
-      </div>
+  <div class="env" id="env" role="button" tabindex="0" aria-label="Open invitation">
+    <div class="inside"></div>
+    <svg class="lines" viewBox="0 0 386 265" preserveAspectRatio="none" aria-hidden="true">
+      <g fill="none" stroke="#b89a5e" stroke-width="1" vector-effect="non-scaling-stroke">
+        <path d="M0 265 L193 140 L386 265" vector-effect="non-scaling-stroke"/>
+      </g>
+    </svg>
+    <div class="flap" aria-hidden="true">
+      <svg viewBox="0 0 386 140" preserveAspectRatio="none">
+        <defs><linearGradient id="fg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fdf8ee"/><stop offset="1" stop-color="#f8f0e0"/></linearGradient></defs>
+        <polygon points="0,0 386,0 193,140" fill="url(#fg)"/>
+        <polyline points="0,0 193,140 386,0" fill="none" stroke="#b89a5e" stroke-width="1" vector-effect="non-scaling-stroke"/>
+      </svg>
     </div>
+    <div class="seal" aria-hidden="true"><span class="r">R</span><span class="s">S</span></div>
   </div>
-
-  <div class="tap">Tap the seal to open</div>
+  <div class="tap-note">Please tap to open the invitation</div>
 </div>
 
 <!-- ============ MAIN INVITATION ============ -->
@@ -409,12 +449,17 @@ footer{
   <!-- HERO -->
   <section id="hero">
     <div class="arch">
-      <div class="bism rv">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-      <div class="eyebrow rv d1">In the name of Allah, the Most Gracious, the Most Merciful</div>
-      <div class="wedding rv d1">Alhamdulillah, the wedding reception of</div>
-      <div class="names rv d2">Ahtesham<span class="amp">&amp;</span>Sabrina</div>
-      <div class="hero-date rv d3"><b>Wedding Reception</b>FRIDAY · 11 DECEMBER 2026<span class="hero-time"><em>at</em><b>2:00 PM</b></span></div>
-      <div class="scroll-cue rv d3">Scroll</div>
+      <svg class="crest" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="9" y="9" width="22" height="22" fill="none" stroke="#d9bf8c" stroke-width="1.3"/>
+        <rect x="9" y="9" width="22" height="22" fill="none" stroke="#d9bf8c" stroke-width="1.3" transform="rotate(45 20 20)"/>
+        <circle cx="20" cy="20" r="4" fill="#d9bf8c"/>
+      </svg>
+      <div class="bism">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+      <div class="eyebrow">In the name of Allah, the Most Gracious, the Most Merciful</div>
+      <div class="wedding">Alhamdulillah, the wedding reception of</div>
+      <div class="names">Ahtesham<span class="amp">&amp;</span>Sabrina</div>
+      <div class="hero-date"><b>Wedding Reception</b>FRIDAY · 11 DECEMBER 2026<span class="hero-time"><em>at</em><b>2:00 PM</b></span></div>
+      <div class="scroll-cue">Scroll</div>
     </div>
   </section>
 
@@ -604,8 +649,15 @@ footer{
         <b>Ahtesham &amp; Sabrina</b>
         Together with our families
       </div>
-      <div class="contact rv d3" id="contact" hidden>
-        <a class="btn solid" id="wa" target="_blank" rel="noopener" href="#">WhatsApp Us</a>
+      <div class="contact rv d3" id="contact">
+        <div class="eyebrow">Contact</div>
+        <div class="c-title">For Any Query</div>
+        <div class="orn"><i>✦</i></div>
+        <div class="c-card">
+          <a class="crow" href="https://wa.me/8801621924444" target="_blank" rel="noopener"><span class="num">+8801621924444</span><span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5Z"/><path d="M9 8.6c.3 2.8 2.6 5.1 5.4 5.4l1-1.3-1.9-1-.8.7a3.6 3.6 0 0 1-1.6-1.6l.7-.8-1-1.9Z"/></svg>WhatsApp</span></a>
+          <a class="crow" href="https://wa.me/8801906323034" target="_blank" rel="noopener"><span class="num">+8801906323034</span><span class="tag"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5Z"/><path d="M9 8.6c.3 2.8 2.6 5.1 5.4 5.4l1-1.3-1.9-1-.8.7a3.6 3.6 0 0 1-1.6-1.6l.7-.8-1-1.9Z"/></svg>WhatsApp</span></a>
+          <a class="crow" href="tel:+8801635295442"><span class="num">+8801635295442</span></a>
+        </div>
       </div>
       <div class="actions rv d3">
         <button class="btn" id="shareBtn" type="button">Share Invitation</button>
@@ -618,6 +670,10 @@ footer{
   </footer>
 </main>
 
+<button id="musicBtn" class="music" type="button" aria-label="Toggle background music"><svg class="note" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M9 18V5.5l10-2V16"/><circle cx="6.5" cy="18" r="2.6"/><circle cx="16.5" cy="16" r="2.6"/>
+  </svg></button>
+
 <script>
 /* =====================================================
    EASY SETTINGS: edit these, nothing else needs changing
@@ -628,7 +684,9 @@ const CONFIG = {
   // Length of the event in hours (used for the calendar only)
   durationHours: 4,
   // WhatsApp number with country code, no + or spaces e.g. "8801XXXXXXXXX". Leave "" to hide button.
-  whatsapp: "",
+  whatsapp: "8801621924444",
+  // Optional: your own music file in the same folder, e.g. "music.mp3". Leave "" to use the built-in soft instrumental.
+  musicUrl: "",
   // Optional programme. Example item: { time: "7:00 PM", title: "Dinner Reception" }
   schedule: [
     // { time: "6:30 PM", title: "Grand Entrance" },
@@ -642,25 +700,171 @@ const VENUE = "Sonar Tori Community Centre, Near DUET, Shimultoly Road, Gazipur 
 const $ = id => document.getElementById(id);
 const pad = n => String(n).padStart(2,"0");
 
-/* ---------------- envelope intro ---------------- */
+/* ---------------- glitter ---------------- */
+const Glitter = (() => {
+  const cv = $("glitter"), c = cv.getContext("2d");
+  const reduce = false;
+  const cols = ["255,236,179","240,223,184","217,191,140","255,250,235","232,196,111"];
+  let W,H,D,P=[],B=[];
+  const mk = init => ({
+    x:Math.random()*W, y:init?-Math.random()*H*.9:-Math.random()*40-8,
+    r:Math.random()*1.8+.6, vy:Math.random()*.7+.3, sw:Math.random()*1.4+.3,
+    ph:Math.random()*6.28, sp:Math.random()*.02+.008, tw:Math.random()*6.28, ts:Math.random()*.05+.02,
+    star:Math.random()<.2, col:cols[(Math.random()*cols.length)|0]
+  });
+  function size(){
+    D=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight;
+    cv.width=W*D; cv.height=H*D; c.setTransform(D,0,0,D,0,0);
+    const n=Math.round(Math.min(48,Math.max(20,W*H/30000)));
+    P=Array.from({length:n},()=>mk(true));
+  }
+  function star(x,y,s,a,col){
+    c.save(); c.translate(x,y); c.globalAlpha=a; c.fillStyle="rgb("+col+")"; c.beginPath();
+    c.moveTo(0,-s*2.8); c.quadraticCurveTo(0,0,s*2.8,0); c.quadraticCurveTo(0,0,0,s*2.8);
+    c.quadraticCurveTo(0,0,-s*2.8,0); c.quadraticCurveTo(0,0,0,-s*2.8); c.fill(); c.restore();
+  }
+  function frame(){
+    c.clearRect(0,0,W,H);
+    for(const p of P){
+      p.y+=p.vy; p.ph+=p.sp; p.x+=Math.sin(p.ph)*p.sw*.4; p.tw+=p.ts;
+      if(p.y>H+14) Object.assign(p,mk(false));
+      const a=.25+.75*Math.abs(Math.sin(p.tw));
+      if(p.star) star(p.x,p.y,p.r*1.5,a,p.col);
+      else{
+        c.fillStyle="rgb("+p.col+")";
+        c.globalAlpha=a*.85; c.beginPath(); c.arc(p.x,p.y,p.r,0,6.283); c.fill();
+        c.globalAlpha=a*.1; c.beginPath(); c.arc(p.x,p.y,p.r*3,0,6.283); c.fill();
+      }
+    }
+    for(let i=B.length-1;i>=0;i--){
+      const b=B[i]; b.x+=b.vx; b.y+=b.vy; b.vx*=.965; b.vy=b.vy*.965+.03; b.life-=.014;
+      if(b.life<=0){B.splice(i,1);continue}
+      star(b.x,b.y,b.r*1.4,Math.min(1,b.life*1.4),b.col);
+    }
+    c.globalAlpha=1; requestAnimationFrame(frame);
+  }
+  size(); addEventListener("resize",size);
+  let started=false;
+  return { start(){ if(started) return; started=true; cv.classList.add("on"); frame(); }, burst(x,y){
+    if(reduce) return;
+    for(let i=0;i<30;i++){
+      const a=Math.random()*6.283, v=Math.random()*5+1.5;
+      B.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.2,r:Math.random()*1.8+.8,life:Math.random()*.7+.7,col:cols[(Math.random()*cols.length)|0]});
+    }
+  }};
+})();
+
+/* ---------------- background music (soft built-in instrumental, or your own file) ---------------- */
+const Music = (() => {
+  const btn = $("musicBtn");
+  let ctx, master, bus, timer, nextT=0, step=0, playing=false, audio=null;
+  const hz = m => 440*Math.pow(2,(m-69)/12);
+  const chords = [[48,55,59,64],[45,52,57,60],[41,48,53,57],[43,50,55,59]];   // C · Am · F · G(sus-ish)
+  const patt = [0,1,2,3,2,1,3,2, 0,2,3,1,3,2,1,2];
+  function init(){
+    ctx = new (window.AudioContext||window.webkitAudioContext)();
+    master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+    bus = ctx.createGain(); bus.connect(master);
+    const dly = ctx.createDelay(1); dly.delayTime.value=.42;
+    const fb = ctx.createGain(); fb.gain.value=.42;
+    const lp = ctx.createBiquadFilter(); lp.type="lowpass"; lp.frequency.value=2200;
+    const wet = ctx.createGain(); wet.gain.value=.55;
+    bus.connect(dly); dly.connect(lp); lp.connect(fb); fb.connect(dly); lp.connect(wet); wet.connect(master);
+  }
+  function pad(notes,t,dur){
+    notes.forEach((m,i)=>{
+      [["sine",0],["triangle",5]].forEach(([type,det])=>{
+        const o=ctx.createOscillator(), g=ctx.createGain();
+        o.type=type; o.frequency.value=hz(m); o.detune.value=det+(i-1.5)*2;
+        g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(type==="sine"?.05:.02,t+2.2);
+        g.gain.linearRampToValueAtTime(0,t+dur);
+        o.connect(g); g.connect(bus); o.start(t); o.stop(t+dur+.1);
+      });
+    });
+  }
+  function bell(m,t,vel){
+    const o=ctx.createOscillator(), o2=ctx.createOscillator(), g=ctx.createGain();
+    o.type="sine"; o.frequency.value=hz(m); o2.type="sine"; o2.frequency.value=hz(m)*2.005;
+    const g2=ctx.createGain(); g2.gain.value=.25;
+    g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vel,t+.012);
+    g.gain.exponentialRampToValueAtTime(.0001,t+2.6);
+    o.connect(g); o2.connect(g2); g2.connect(g); g.connect(bus);
+    o.start(t); o2.start(t); o.stop(t+2.7); o2.stop(t+2.7);
+  }
+  function sched(){
+    while(nextT < ctx.currentTime+1.4){
+      const ci=Math.floor(step/16)%chords.length, ch=chords[ci], k=step%16;
+      if(k===0) pad(ch,nextT,10.2);
+      const m = ch[patt[k]]+12 + (k%8===7?12:0);
+      if(k%2===0 || Math.random()<.5) bell(m,nextT,.075+Math.random()*.03);
+      if(k===0) bell(ch[0]-12,nextT,.12);
+      nextT+=.6; step++;
+    }
+  }
+  function setUI(){ btn.classList.toggle("on",playing); }
+  async function start(){
+    btn.classList.add("show");
+    if(playing) return;
+    if(CONFIG.musicUrl){
+      if(!audio){ audio=new Audio(CONFIG.musicUrl); audio.loop=true; audio.volume=.55; }
+      try{ await audio.play(); playing=true; }catch(e){ playing=false; }
+    }else{
+      try{
+        if(!ctx) init();
+        await ctx.resume();
+        nextT=ctx.currentTime+.2; step=0;
+        sched(); timer=setInterval(sched,300);
+        master.gain.cancelScheduledValues(ctx.currentTime);
+        master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
+        master.gain.linearRampToValueAtTime(.9,ctx.currentTime+3.5);
+        playing=true;
+      }catch(e){ playing=false; }
+    }
+    setUI();
+  }
+  function stop(){
+    if(!playing) return;
+    if(audio) audio.pause();
+    if(ctx){
+      clearInterval(timer);
+      master.gain.cancelScheduledValues(ctx.currentTime);
+      master.gain.setValueAtTime(master.gain.value,ctx.currentTime);
+      master.gain.linearRampToValueAtTime(0,ctx.currentTime+.6);
+      setTimeout(()=>{ if(!playing && ctx) ctx.suspend(); },800);
+    }
+    playing=false; setUI();
+  }
+  btn.addEventListener("click",()=> playing ? stop() : start());
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden){ if(audio&&playing) audio.pause(); if(ctx&&playing) ctx.suspend(); }
+    else{ if(audio&&playing) audio.play().catch(()=>{}); if(ctx&&playing) ctx.resume(); }
+  });
+  return { start, stop };
+})();
+
+/* ---------------- envelope intro: flap opens, then straight into the invitation ---------------- */
+try{ ["400 30px Amiri","600 24px Cinzel","500 24px Cinzel","italic 400 24px 'Cormorant Garamond'","400 14px Jost"].forEach(f=>document.fonts.load(f,"Aa بِسْمِ")); }catch(e){}
+const fontsReady = () => Promise.race([ (document.fonts&&document.fonts.ready)||Promise.resolve(), new Promise(r=>setTimeout(r,2500)) ]);
 const env = $("env"), intro = $("intro");
 let opened = false;
+function finishPage(){
+  window.scrollTo(0,0);
+  document.body.classList.remove("locked");
+  document.body.classList.add("ready");
+  try{ Glitter.start(); }catch(e){}
+  observe();
+  const done = () => { document.body.classList.remove("locked"); intro.remove(); };
+  const fade = intro.animate ? intro.animate([{opacity:1},{opacity:0}],{duration:1000,fill:"forwards",easing:"ease"}) : null;
+  if(fade){ fade.onfinish = done; setTimeout(done,1500); } else { intro.classList.add("leave"); setTimeout(done,1200); }
+}
 function openInvite(){
   if(opened) return; opened = true;
-  env.classList.add("open");                       // 0s: flap opens, seal fades
-  setTimeout(() => env.classList.add("out"), 950);  // after flap: card slides out
-  setTimeout(() => {                                // card is out: reveal the page
-    window.scrollTo(0,0);
-    document.body.classList.add("ready");
-    intro.classList.add("leave");
-    observe();
-  }, 2100);
-  setTimeout(() => {
-    document.body.classList.remove("locked");
-    intro.remove();
-  }, 3100);
+  try{ Music.start(); }catch(e){}
+  intro.classList.add("opening");
+  env.classList.add("open");               // seal fades, flap lifts
+  setTimeout(async () => { await fontsReady(); finishPage(); }, 850);
 }
-env.addEventListener("click", openInvite);
+intro.addEventListener("click", openInvite);
 env.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openInvite(); }});
 
 /* ---------------- scroll reveal ---------------- */
@@ -737,10 +941,7 @@ if(CONFIG.schedule.length){
 }
 
 /* ---------------- whatsapp ---------------- */
-if(CONFIG.whatsapp){
-  $("contact").hidden = false;
-  $("wa").href = "https://wa.me/" + CONFIG.whatsapp;
-}
+/* contact numbers are written directly in the page (Contact section) */
 
 /* ---------------- share ---------------- */
 $("shareBtn").addEventListener("click", async () => {
