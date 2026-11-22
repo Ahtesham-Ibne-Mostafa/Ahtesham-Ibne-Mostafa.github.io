@@ -313,7 +313,7 @@ footer{
 
 
 /* ===================== v3: glitter, floating card, music, smooth opening ===================== */
-#glitter{position:fixed;inset:0;z-index:200;pointer-events:none}
+#glitter{position:fixed;inset:0;width:100%;height:100%;z-index:200;pointer-events:none}
 .orbs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .orbs i{position:absolute;border-radius:50%;filter:blur(46px);background:radial-gradient(circle,rgba(217,191,140,.26),transparent 70%);animation:drift 20s ease-in-out infinite}
 @keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(30px,-50px,0) scale(1.18)}}
@@ -412,8 +412,6 @@ body.ready .arch{animation:archIn 1.5s cubic-bezier(.2,.8,.2,1) .55s both, float
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 .92  0 0 0 0 .75  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:220px 220px}
 
 /* ---- glitter only after the envelope opens ---- */
-#glitter{opacity:0;transition:opacity 2.5s ease}
-#glitter.on{opacity:1}
 
 /* ---- music button (note icon) ---- */
 .note{width:22px;height:22px;overflow:visible}
@@ -424,28 +422,19 @@ body.ready .arch{animation:archIn 1.5s cubic-bezier(.2,.8,.2,1) .55s both, float
 .music.on::before{animation:ripple 2.4s ease-out infinite}
 @keyframes ripple{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.55);opacity:0}}
 
-/* ===================== v4: glitter text reveal (GPU-only: opacity + transform) ===================== */
-.tx .w{
-  display:inline-block;opacity:0;transform:translate3d(0,16px,0) scale(.98);
-  transition:opacity .9s ease, transform 1s cubic-bezier(.2,.7,.2,1);
-  transition-delay:calc(var(--o,0s) + var(--i,0)*var(--s,60ms));
-  background:linear-gradient(110deg,var(--tc,#f0dfb8) 42%,var(--hi,#fffdf2) 50%,var(--tc,#f0dfb8) 58%);
-  background-size:260% 100%;background-position:100% 0;
-  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
-}
-.tx.in .w{
-  opacity:1;transform:none;
-  animation:sweep 1.7s ease-out calc(var(--o,0s) + var(--i,0)*var(--s,60ms) + .45s) 1 both;
-}
-@keyframes sweep{from{background-position:100% 0}to{background-position:0 0}}
-.rv.tx{transform:none;transition:opacity .5s ease}
-.rv.d1{--o:.12s}.rv.d2{--o:.24s}.rv.d3{--o:.36s}
+/* ===================== v4: word reveal (same as reference page) ===================== */
+.w{display:inline-block;opacity:0;transform:translateY(12px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--dl,0ms) + 150ms)}
+.in .w{opacity:1;transform:none}
 .orbs i{will-change:transform}
 .sticker{will-change:translate}
-.grain,.vignette,.glow,.pattern,#glitter{transform:translateZ(0)}
-@media (prefers-reduced-motion:reduce){
-  .tx .w{opacity:1;transform:none;transition:none;animation:none!important;color:inherit;-webkit-text-fill-color:currentColor;background:none}
-}
+.grain,.vignette,.glow,.pattern{transform:translateZ(0)}
+
+/* names: each word carries the gold shimmer (so the words can reveal one by one) */
+.names{background:none;-webkit-text-fill-color:initial;color:#f0dfb8;animation:none}
+.names .w{background:linear-gradient(100deg,#d9bf8c 0%,#f0dfb8 35%,#fffbe9 50%,#f0dfb8 65%,#d9bf8c 100%);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:goldflow 6s linear infinite}
+.names .amp .w{background:none;color:var(--gold);-webkit-text-fill-color:var(--gold);animation:none}
+@media (prefers-reduced-motion:reduce){.w{opacity:1;transform:none;transition:none}}
 
 /* ---- v5: subtle small music button + envelope card stays centred ---- */
 .music{width:34px;height:34px;top:max(12px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));
@@ -830,67 +819,31 @@ const VENUE = "Sonar Tori Community Centre, Near DUET, Shimultoly Road, Gazipur 
 const $ = id => document.getElementById(id);
 const pad = n => String(n).padStart(2,"0");
 
-/* ---------------- glitter ---------------- */
-const Glitter = (() => {
-  const cv = $("glitter"), c = cv.getContext("2d");
-  const reduce = false;
-  const cols = ["255,236,179","240,223,184","217,191,140","255,250,235","232,196,111"];
-  let W,H,D,P=[],B=[];
-  const mk = init => ({
-    x:Math.random()*W, y:init?-Math.random()*H*.9:-Math.random()*40-8,
-    r:Math.random()*1.8+.6, vy:Math.random()*.7+.3, sw:Math.random()*1.4+.3,
-    ph:Math.random()*6.28, sp:Math.random()*.02+.008, tw:Math.random()*6.28, ts:Math.random()*.05+.02,
-    star:Math.random()<.2, col:cols[(Math.random()*cols.length)|0]
-  });
-  function size(){
-    D=Math.min(devicePixelRatio||1,2); W=innerWidth; H=innerHeight;
-    cv.width=W*D; cv.height=H*D; c.setTransform(D,0,0,D,0,0);
-    const n=Math.round(Math.min(48,Math.max(20,W*H/30000)));
-    P=Array.from({length:n},()=>mk(true));
-  }
-  function star(x,y,s,a,col){
-    c.save(); c.translate(x,y); c.globalAlpha=a; c.fillStyle="rgb("+col+")"; c.beginPath();
-    c.moveTo(0,-s*2.8); c.quadraticCurveTo(0,0,s*2.8,0); c.quadraticCurveTo(0,0,0,s*2.8);
-    c.quadraticCurveTo(0,0,-s*2.8,0); c.quadraticCurveTo(0,0,0,-s*2.8); c.fill(); c.restore();
-  }
-  function frame(){
-    if(document.hidden){ requestAnimationFrame(frame); return; }
-    c.clearRect(0,0,W,H);
-    for(const p of P){
-      p.y+=p.vy; p.ph+=p.sp; p.x+=Math.sin(p.ph)*p.sw*.4; p.tw+=p.ts;
-      if(p.y>H+14) Object.assign(p,mk(false));
-      const a=.25+.75*Math.abs(Math.sin(p.tw));
-      if(p.star) star(p.x,p.y,p.r*1.5,a,p.col);
-      else{
-        c.fillStyle="rgb("+p.col+")";
-        c.globalAlpha=a*.85; c.beginPath(); c.arc(p.x,p.y,p.r,0,6.283); c.fill();
-        c.globalAlpha=a*.1; c.beginPath(); c.arc(p.x,p.y,p.r*3,0,6.283); c.fill();
-      }
-    }
-    for(let i=B.length-1;i>=0;i--){
-      const b=B[i]; b.x+=b.vx; b.y+=b.vy; b.vx*=.965; b.vy=b.vy*.965+(b.g||.03); b.life-=(b.d||.014);
-      if(b.life<=0){B.splice(i,1);continue}
-      star(b.x,b.y,b.r*1.4,Math.min(1,b.life*1.4),b.col);
-    }
-    c.globalAlpha=1; requestAnimationFrame(frame);
-  }
-  size(); let lw=innerWidth, lh=innerHeight;
-  addEventListener("resize",()=>{ if(innerWidth!==lw || Math.abs(innerHeight-lh)>160){ lw=innerWidth; lh=innerHeight; size(); } });
-  let started=false;
-  return { start(){ if(started) return; started=true; cv.classList.add("on"); frame(); }, dust(r,n){
-    if(B.length>170) return;
-    for(let i=0;i<n;i++){
-      B.push({x:r.left+Math.random()*r.width, y:r.top+Math.random()*r.height,
-        vx:(Math.random()-.5)*.7, vy:-Math.random()*.5-.1, g:.006, d:.009+Math.random()*.008,
-        r:Math.random()*1.3+.6, life:1+Math.random()*.4, col:cols[(Math.random()*cols.length)|0]});
-    }
-  }, burst(x,y,n){
-    if(reduce) return;
-    for(let i=0;i<(n||30);i++){
-      const a=Math.random()*6.283, v=Math.random()*5+1.5;
-      B.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.2,r:Math.random()*1.8+.8,life:Math.random()*.7+.7,col:cols[(Math.random()*cols.length)|0]});
-    }
-  }};
+/* ---------------- glitter (sprite based, same engine as the reference page) ---------------- */
+const Glitter = { start(){} };
+(function(){
+  const c=$("glitter"),x=c.getContext("2d");let W,H,P=[],dpr=1;
+  const cols=["255,226,150","240,200,120","255,244,214","217,175,95"];
+  const SP={};cols.forEach(c=>{const o=document.createElement("canvas");o.width=o.height=64;const g=o.getContext("2d"),gr=g.createRadialGradient(32,32,0,32,32,32);
+    gr.addColorStop(0,`rgba(${c},.35)`);gr.addColorStop(1,`rgba(${c},0)`);g.fillStyle=gr;g.fillRect(0,0,64,64);g.fillStyle=`rgba(${c},1)`;g.beginPath();
+    g.moveTo(32,18);g.quadraticCurveTo(32,32,46,32);g.quadraticCurveTo(32,32,32,46);g.quadraticCurveTo(32,32,18,32);g.quadraticCurveTo(32,32,32,18);g.fill();SP[c]=o});
+  function spr(px,py,r,a,c){const s=r*4.6;x.globalAlpha=a;x.drawImage(SP[c],px-s,py-s,s*2,s*2)}
+  function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+  function mk(init){return{x:Math.random()*W,y:init?Math.random()*H:H+20,r:Math.random()*3.2+1,vy:Math.random()*.55+.15,sw:Math.random()*40+10,ph:Math.random()*6.28,sp:Math.random()*.03+.012,tw:Math.random()*6.28,col:cols[Math.random()*4|0]}}
+  function init(){size();const n=Math.min(55,Math.round(W*H/24000));P=Array.from({length:n},()=>mk(true))}
+  const B=[];
+  window.burst=function(el,more){if(!el)return;const r=el.getBoundingClientRect();if(r.width<2||r.bottom<0||r.top>innerHeight)return;
+    const n=Math.min(more?40:16,Math.round(r.width*r.height/2400)+10);
+    for(let i=0;i<n;i++)B.push({x:r.left+Math.random()*r.width,y:r.top+Math.random()*r.height,vx:(Math.random()-.5)*1.3,vy:-Math.random()*1.2-.15,r:Math.random()*2.3+.9,life:-Math.random()*25,max:80+Math.random()*70,tw:Math.random()*6,col:cols[Math.random()*4|0]})};
+  function frame(){requestAnimationFrame(frame);if(document.hidden)return;x.clearRect(0,0,W,H);
+    for(const p of P){p.y-=p.vy;p.ph+=p.sp;p.tw+=.045;const px=p.x+Math.sin(p.ph)*p.sw,a=.25+.75*Math.abs(Math.sin(p.tw));
+      spr(px,p.y,p.r,a,p.col);
+      if(p.y<-20)Object.assign(p,mk(false))}
+    for(let k=B.length-1;k>=0;k--){const b=B[k];b.life++;if(b.life<0)continue;b.x+=b.vx;b.y+=b.vy;b.tw+=.13;if(b.life>b.max){B.splice(k,1);continue}
+      const a=Math.sin(b.life/b.max*Math.PI)*(.45+.55*Math.abs(Math.sin(b.tw)));spr(b.x,b.y,b.r,a,b.col)}x.globalAlpha=1}
+  let lw=innerWidth,lh=innerHeight;   /* ignore the phone address bar growing/shrinking */
+  addEventListener("resize",()=>{if(innerWidth!==lw||Math.abs(innerHeight-lh)>160){lw=innerWidth;lh=innerHeight;init()}});
+  init();requestAnimationFrame(frame);
 })();
 
 /* ---------------- background music (soft built-in instrumental, or your own file) ---------------- */
@@ -1000,16 +953,7 @@ function openInvite(){
   if(opened) return; opened = true;
   try{ Music.start(); }catch(e){}
   intro.classList.add("opening");
-  /* glitter as the envelope opens */
-  try{ $("glitter").style.transition="opacity .4s ease"; Glitter.start(); }catch(e){}
-  const er = () => env.getBoundingClientRect();
-  const spark = (fx,fy,n) => { const r=er(); try{ Glitter.burst(r.left+r.width*fx, r.top+r.height*fy, n); }catch(e){} };
-  const dustAll = n => { try{ Glitter.dust(er(), n); }catch(e){} };
-  spark(.5,.53,36);                                            // seal bursts open
-  setTimeout(()=>{ spark(.3,.2,22); spark(.7,.2,22); dustAll(16); },450);   // flap lifts
-  setTimeout(()=>{ spark(.5,.05,40); dustAll(18); },1250);     // card rises
-  const shimmer = setInterval(()=>dustAll(6),240);
-  setTimeout(()=>clearInterval(shimmer),2700);
+  setTimeout(()=>window.burst&&window.burst(env,true),500);   /* glitter as the envelope opens */
   env.classList.add("open");                                   // seal fades, flap opens
   setTimeout(()=>{ env.classList.add("out"); intro.classList.add("lifted"); },1200);               // little card pops half way out (stays on screen)
   setTimeout(async()=>{ await fontsReady(); finishPage(); },2700); // then straight into the full invitation
@@ -1017,57 +961,30 @@ function openInvite(){
 intro.addEventListener("click", openInvite);
 env.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openInvite(); }});
 
-/* ---------------- glitter text reveal ---------------- */
-const TX_SEL = ".arch .bism,.arch .eyebrow,.arch .wedding,.hero-date,.salam,.salam-en,.msg,.quote .ar,.quote .tr,.quote .en,"
-  + ".eyebrow.rv,.h-section,.venue-name,.venue-addr,.card .role,.card h3,.card .of,.card .par,.side,.attime,.celebrate,"
-  + ".map-note,.gift,.jazak,.sign,.c-title,.c-note,.contact .eyebrow";
+/* ---------------- word reveal + glitter where text appears (same as reference page) ---------------- */
+const TX_SEL = ".names,.h-section,.venue-name,.gift,.msg,.arch .wedding,.celebrate,.card h3,.sign b,.salam-en,.hero-date";
+/* hero blocks fade in one after another, as on the reference page */
+[[".arch .bism",""],[".arch .eyebrow","d1"],[".arch .wedding","d1"],[".names","d2"],[".hero-date","d3"],[".scroll-cue","d3"]].forEach(([q,d])=>{
+  const e=document.querySelector(q); if(e){ e.classList.add("rv"); if(d) e.classList.add(d); }
+});
 function splitWords(el){
-  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
-  const nodes = []; let n; while(n = walker.nextNode()) if(n.nodeValue.trim()) nodes.push(n);
-  let i = 0;
-  nodes.forEach(node => {
-    const frag = document.createDocumentFragment();
-    const tc = getComputedStyle(node.parentNode).color;
-    node.nodeValue.split(/(\s+)/).forEach(part => {
-      if(!part) return;
-      if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(" ")); return; }
-      const w = document.createElement("span"); w.className = "w"; w.textContent = part; w.style.setProperty("--i", i++); w.style.setProperty("--tc", tc);
-      frag.appendChild(w);
-    });
-    node.parentNode.replaceChild(frag, node);
-  });
-  return i;
+  const tw=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),nodes=[];
+  while(tw.nextNode()){const n=tw.currentNode;if(n.textContent.trim()&&!(n.parentElement&&n.parentElement.closest(".names")))nodes.push(n)}
+  const total=nodes.reduce((a,n)=>a+n.textContent.split(/\s+/).filter(Boolean).length,0),step=Math.min(85,1500/Math.max(total,1));let i=0;
+  nodes.forEach(n=>{const f=document.createDocumentFragment();n.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;
+    if(/^\s+$/.test(t))f.appendChild(document.createTextNode(" "));else{const sp=document.createElement("span");sp.className="w";sp.style.setProperty("--dl",(i++*step)+"ms");sp.textContent=t;f.appendChild(sp)}});n.replaceWith(f)});
+  /* text that isn't inside a reveal block (hero) still needs something to trigger it */
+  if(i && !el.closest(".rv,.rvx")) el.classList.add("rvx");
 }
-function prepText(){
-  const seen = new Set();
-  document.querySelectorAll(TX_SEL).forEach(el => {
-    if(seen.has(el) || el.closest(".names") || el.querySelector(".tx")) return;
-    seen.add(el);
-    el.style.setProperty("--tc", getComputedStyle(el).color);
-    const count = splitWords(el);
-    if(!count) return;
-    el.style.setProperty("--s", Math.min(70, Math.round(1500/count)) + "ms");
-    el.classList.add("tx","rv");
-  });
-}
-try{ prepText(); }catch(e){ console.warn(e); }
+try{ document.querySelectorAll(TX_SEL).forEach(el=>{ if(!el.querySelector(".w")) splitWords(el); }); }catch(e){ console.warn(e); }
 
-/* ---------------- scroll reveal (+ glitter dust where text appears) ---------------- */
 function observe(){
-  const items = document.querySelectorAll(".rv");
-  const reveal = el => {
-    el.classList.add("in");
-    if(el.classList.contains("tx")){
-      const n = Math.min(16, 5 + Math.round(el.getBoundingClientRect().width/60));
-      setTimeout(()=>{ try{ Glitter.dust(el.getBoundingClientRect(), n); }catch(e){} }, 350);
-      setTimeout(()=>{ try{ Glitter.dust(el.getBoundingClientRect(), Math.ceil(n/2)); }catch(e){} }, 1100);
-    }
-  };
-  if(!("IntersectionObserver" in window)){ items.forEach(i=>i.classList.add("in")); return; }
-  const io = new IntersectionObserver(es => es.forEach(e => {
-    if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target); }
-  }), {threshold:.12, rootMargin:"0px 0px -5% 0px"});
-  items.forEach(i => io.observe(i));
+  const it=document.querySelectorAll(".rv,.rvx");
+  if(!("IntersectionObserver" in window)){it.forEach(i=>i.classList.add("in"));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);const t=e.target;setTimeout(()=>window.burst&&window.burst(t),400)}
+  }),{threshold:.15,rootMargin:"0px 0px -6% 0px"});
+  it.forEach(i=>io.observe(i));
 }
 
 /* ---------------- date / time helpers ---------------- */
