@@ -35,7 +35,7 @@ body{
   overflow-x:hidden;
   -webkit-font-smoothing:antialiased;
 }
-body.locked{overflow:hidden;height:100vh}
+body.locked{overflow:hidden}
 a{color:inherit}
 
 /* ------------ shared bits ------------ */
@@ -80,10 +80,10 @@ a{color:inherit}
   position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;
   background:
     radial-gradient(70% 55% at 50% 40%, var(--em-700), var(--em-900) 70%, var(--em-950));
-  transition:opacity 1.1s ease, transform 1.4s ease, visibility 1.1s;
+  transition:opacity .9s ease, visibility .9s;
   padding:24px;
 }
-#intro.leave{opacity:0;transform:scale(1.12);visibility:hidden}
+#intro.leave{opacity:0;visibility:hidden;pointer-events:none}
 #intro .stars span{position:absolute;color:var(--gold);opacity:.5;animation:tw 3.2s ease-in-out infinite}
 @keyframes tw{0%,100%{opacity:.15;transform:scale(.7)}50%{opacity:.9;transform:scale(1.2)}}
 .intro-top{text-align:center;margin-bottom:34px;animation:fadeUp 1s ease both}
@@ -92,32 +92,32 @@ a{color:inherit}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 @keyframes popIn{0%{opacity:0;transform:scale(.6) translateY(30px)}70%{transform:scale(1.04)}100%{opacity:1;transform:none}}
 
-.env-wrap{perspective:1200px;animation:popIn 1.1s .25s cubic-bezier(.2,.9,.3,1.2) both}
+.env-wrap{animation:popIn 1.1s .25s cubic-bezier(.2,.9,.3,1.2) both}
 .env{
   position:relative;width:min(84vw,400px);aspect-ratio:1.45;cursor:pointer;
-  filter:drop-shadow(0 30px 40px rgba(0,0,0,.55));
+  perspective:1000px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
 }
-.env .back{position:absolute;inset:0;background:#0b2b23;border-radius:8px}
+.env .back{position:absolute;inset:0;background:#0b2b23;border-radius:8px;box-shadow:0 30px 50px rgba(0,0,0,.55)}
 .env .letter{
   position:absolute;left:6%;right:6%;top:6%;height:88%;border-radius:6px;z-index:2;
   background:linear-gradient(180deg,#fffaf0,var(--ivory));color:var(--ink);
   display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   border:1px solid var(--gold);outline:1px solid rgba(169,138,82,.45);outline-offset:-7px;
-  transition:transform 1s cubic-bezier(.4,.1,.2,1);
+  transition:transform 1s cubic-bezier(.4,.1,.2,1);will-change:transform;
 }
 .letter .a{font-family:'Amiri',serif;color:var(--gold-lo);font-size:18px}
 .letter .t{font-family:'Jost',sans-serif;letter-spacing:.28em;font-size:8px;text-transform:uppercase;margin:4px 0 8px;color:#5a6b64}
 .letter .n{font-family:'Cinzel',serif;font-weight:600;font-size:clamp(19px,5.2vw,25px);letter-spacing:.07em;color:var(--em-700);line-height:1.35}
 .pocket{position:absolute;inset:0;z-index:3;pointer-events:none}
 .pocket div{position:absolute;inset:0;border-radius:8px}
-.pocket .l{background:#12423a;clip-path:polygon(0 0,52% 52%,0 100%)}
-.pocket .r{background:#12423a;clip-path:polygon(100% 0,48% 52%,100% 100%)}
-.pocket .b{background:#0f372f;clip-path:polygon(0 100%,50% 42%,100% 100%)}
+.pocket .l{background:#12423a;-webkit-clip-path:polygon(0 0,52% 52%,0 100%);clip-path:polygon(0 0,52% 52%,0 100%)}
+.pocket .r{background:#12423a;-webkit-clip-path:polygon(100% 0,48% 52%,100% 100%);clip-path:polygon(100% 0,48% 52%,100% 100%)}
+.pocket .b{background:#0f372f;-webkit-clip-path:polygon(0 100%,50% 42%,100% 100%);clip-path:polygon(0 100%,50% 42%,100% 100%)}
 .flap{
   position:absolute;left:0;right:0;top:0;height:56%;z-index:4;
   background:linear-gradient(180deg,#1a5648,#154a3e);
-  clip-path:polygon(0 0,100% 0,50% 100%);
-  transform-origin:top center;transition:transform .9s cubic-bezier(.4,.1,.2,1), z-index 0s .45s;
+  -webkit-clip-path:polygon(0 0,100% 0,50% 100%);clip-path:polygon(0 0,100% 0,50% 100%);
+  transform-origin:top center;transition:transform .9s cubic-bezier(.45,.05,.25,1);will-change:transform;
 }
 .seal{
   position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);z-index:6;
@@ -139,11 +139,11 @@ a{color:inherit}
 }
 @keyframes blink{50%{opacity:.35}}
 
-.env.open .flap{transform:rotateX(180deg);z-index:1}
+.env.open .flap{transform:rotateX(180deg)}
+.env.out .flap{z-index:1}
 .env.open .seal{opacity:0;transform:translate(-50%,-50%) scale(.4)}
 .env.open .env-label{opacity:0;transition:opacity .3s}
-.env.open .letter{transform:translateY(-62%) scale(1.02)}
-.env.open{animation:none}
+.env.out .letter{transform:translateY(-60%) scale(1.03)}
 
 /* ------------ MAIN ------------ */
 main{position:relative;z-index:1;opacity:0;transition:opacity 1.2s ease}
@@ -638,15 +638,18 @@ const env = $("env"), intro = $("intro");
 let opened = false;
 function openInvite(){
   if(opened) return; opened = true;
-  env.classList.add("open");
-  setTimeout(() => intro.classList.add("leave"), 1900);
+  env.classList.add("open");                       // 0s: flap opens, seal fades
+  setTimeout(() => env.classList.add("out"), 950);  // after flap: card slides out
+  setTimeout(() => {                                // card is out: reveal the page
+    window.scrollTo(0,0);
+    document.body.classList.add("ready");
+    intro.classList.add("leave");
+    observe();
+  }, 2100);
   setTimeout(() => {
     document.body.classList.remove("locked");
-    document.body.classList.add("ready");
-    window.scrollTo(0,0);
-    observe();
-  }, 2300);
-  setTimeout(() => intro.remove(), 3600);
+    intro.remove();
+  }, 3100);
 }
 env.addEventListener("click", openInvite);
 env.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openInvite(); }});
