@@ -121,7 +121,7 @@ a{color:inherit}
 }
 .seal{
   position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);z-index:6;
-  width:clamp(52px,15vw,66px);aspect-ratio:1;border-radius:50%;
+  width:clamp(96px,29vw,118px);aspect-ratio:1;border-radius:50%;padding:2px;
   background:radial-gradient(circle at 35% 30%,var(--gold-hi),var(--gold) 45%,var(--gold-lo));
   box-shadow:0 4px 14px rgba(0,0,0,.5), inset 0 -3px 6px rgba(0,0,0,.25);
   display:grid;place-items:center;color:var(--em-900);
@@ -130,7 +130,7 @@ a{color:inherit}
 }
 @keyframes pulse{0%,100%{box-shadow:0 4px 14px rgba(0,0,0,.5),0 0 0 0 rgba(217,191,140,.5)}50%{box-shadow:0 4px 14px rgba(0,0,0,.5),0 0 0 14px rgba(217,191,140,0)}}
 .env-label{
-  position:absolute;left:0;right:0;bottom:9%;z-index:5;text-align:center;pointer-events:none;
+  position:absolute;left:0;right:0;bottom:3.5%;z-index:5;text-align:center;pointer-events:none;
 }
 .env-label .eyebrow{color:var(--gold-hi);font-size:9.5px}
 .tap{
@@ -158,7 +158,8 @@ section{padding:96px 22px;text-align:center;position:relative}
 .rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.36s}
 
 /* hero */
-#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:70px 16px}
+#hero{display:flex;align-items:flex-start;justify-content:center;padding:26px 14px 40px}
+@media(min-width:700px){#hero{min-height:100vh;min-height:100svh;align-items:center;padding:60px 16px}}
 .arch{
   width:min(92vw,520px);padding:120px 26px 70px;position:relative;
   background:linear-gradient(180deg,rgba(13,47,39,.92),rgba(4,20,15,.96));
@@ -209,13 +210,14 @@ section{padding:96px 22px;text-align:center;position:relative}
 }
 .card .role{font-family:'Jost',sans-serif;font-size:10.5px;letter-spacing:.34em;color:var(--gold)}
 .sticker{
-  width:128px;height:128px;margin:16px auto 10px;
-  filter:drop-shadow(0 8px 10px rgba(0,0,0,.45));
+  width:150px;height:188px;margin:18px auto 12px;
+  filter:drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
+         drop-shadow(0 10px 12px rgba(0,0,0,.45));
   animation:bob 4.5s ease-in-out infinite;
 }
-.sticker.g{transform:rotate(-5deg)}
-.sticker.b{transform:rotate(5deg);animation-delay:-2s}
-.sticker svg{width:100%;height:100%;display:block}
+.sticker.g{transform:rotate(-3deg)}
+.sticker.b{transform:rotate(3deg);animation-delay:-2s}
+.sticker svg{width:100%;height:100%;display:block;overflow:visible}
 @keyframes bob{0%,100%{translate:0 0}50%{translate:0 -6px}}
 .card h3{font-family:'Cinzel',serif;font-weight:500;font-size:clamp(20px,5vw,25px);letter-spacing:.06em;color:var(--gold-hi);line-height:1.3}
 .card .of{font-style:italic;color:var(--gold);margin-top:14px;font-size:18px}
@@ -279,7 +281,14 @@ footer{
 
 @media(max-width:480px){
   section{padding:76px 18px}
-  .arch{padding:104px 18px 56px}
+  .arch{padding:78px 18px 46px;border-radius:172px 172px 14px 14px / 130px 130px 14px 14px}
+  .arch::before{border-radius:164px 164px 8px 8px / 122px 122px 8px 8px}
+  .arch .wedding{margin-top:26px}
+  .hero-date{margin-top:26px}
+  .scroll-cue{margin-top:24px}
+  .scroll-cue::after{height:30px}
+  .intro-top{margin-bottom:22px}
+  .tap{margin-top:24px}
   .cb{min-width:64px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -319,7 +328,66 @@ footer{
       <div class="pocket"><div class="l"></div><div class="r"></div><div class="b"></div></div>
       <div class="flap"></div>
       <div class="env-label"><div class="eyebrow">Ahtesham &amp; Sabrina</div></div>
-      <div class="seal" aria-hidden="true">A&amp;S</div>
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="98" fill="#fffaf0"/>
+          <circle cx="100" cy="100" r="95" fill="#fbf1dc"/>
+          <circle cx="100" cy="100" r="91" fill="none" stroke="#d9bf8c" stroke-width="1.2"/>
+          <ellipse cx="106" cy="172" rx="46" ry="4" fill="#000" opacity=".08"/>
+          <!-- veil + bun -->
+          <path d="M128 50 Q160 60 154 132 L140 112Z" fill="#fff" opacity=".75" stroke="#e4e4e4" stroke-width="1"/>
+          <circle cx="141" cy="50" r="8" fill="#6b4a34"/>
+          <!-- bride gown -->
+          <path d="M114 104 Q126 98 138 104 L157 168 Q126 178 98 168Z" fill="#fffaf0" stroke="#e3d6bd" stroke-width="1.2"/>
+          <path d="M126 118 L124 170 M118 114 L108 168 M134 114 L142 170" stroke="#eadfc8" stroke-width=".9" fill="none"/>
+          <rect x="121" y="84" width="9" height="14" rx="4" fill="#f7d6b8"/>
+          <path d="M114 105 Q126 91 138 105 L138 108 Q126 100 114 108Z" fill="#f7d6b8"/>
+          <path d="M115 106 Q126 112 137 106 L136 123 Q126 127 116 123Z" fill="#fffaf0" stroke="#e3d6bd" stroke-width="1"/>
+          <path d="M116 123 Q126 127 136 123" stroke="#d9bf8c" stroke-width="2" fill="none"/>
+          <!-- groom legs, shoes -->
+          <rect x="68" y="138" width="9" height="29" rx="3" fill="#8c8f93"/><rect x="80" y="138" width="9" height="29" rx="3" fill="#8c8f93"/>
+          <ellipse cx="71" cy="168" rx="7.5" ry="3.6" fill="#2a2522"/><ellipse cx="88" cy="168" rx="7.5" ry="3.6" fill="#2a2522"/>
+          <!-- groom jacket -->
+          <path d="M60 100 Q60 90 78 90 Q96 90 96 100 L97 142 H59Z" fill="#a2a5a8" stroke="#7e8083" stroke-width="1"/>
+          <path d="M68 96 L78 138 L88 96 Q78 104 68 96Z" fill="#dcdcd4"/>
+          <path d="M72 91 L78 104 L84 91Z" fill="#fff"/>
+          <path d="M68 91 L73 114 L61 100Z M88 91 L83 114 L95 100Z" fill="#8e9194"/>
+          <circle cx="78" cy="114" r="1.4" fill="#888"/><circle cx="78" cy="124" r="1.4" fill="#888"/>
+          <path d="M73 92 l5 3 l5 -3 v6 l-5 -3 l-5 3z" fill="#2a2522"/>
+          <!-- arms -->
+          <path d="M62 100 Q51 114 60 128" fill="none" stroke="#a2a5a8" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="61" cy="130" r="4.2" fill="#f7d6b8"/>
+          <path d="M94 100 Q104 112 108 126" fill="none" stroke="#a2a5a8" stroke-width="9" stroke-linecap="round"/>
+          <path d="M116 106 Q112 118 110 126" fill="none" stroke="#f7d6b8" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="109" cy="128" r="4.6" fill="#f7d6b8"/>
+          <!-- groom head -->
+          <circle cx="59" cy="66" r="3.6" fill="#f2c8a6"/><circle cx="97" cy="66" r="3.6" fill="#f2c8a6"/>
+          <circle cx="78" cy="64" r="19" fill="#f7d6b8"/>
+          <path d="M58 62 Q56 40 78 40 Q100 40 98 62 Q96 50 88 48 Q82 54 70 52 Q62 52 58 62Z" fill="#6b4a34"/>
+          <circle cx="72" cy="66" r="2.7" fill="#2a1c16"/><circle cx="86" cy="66" r="2.7" fill="#2a1c16"/>
+          <circle cx="72.9" cy="65" r=".9" fill="#fff"/><circle cx="86.9" cy="65" r=".9" fill="#fff"/>
+          <path d="M68 60 q4 -2 7 0 M82 60 q4 -2 7 0" stroke="#5a3d2b" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <circle cx="66" cy="73" r="3.6" fill="#f2a39a" opacity=".6"/><circle cx="90" cy="73" r="3.6" fill="#f2a39a" opacity=".6"/>
+          <path d="M74 74 Q79 79 84 74" stroke="#9a4a3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- bride head -->
+          <circle cx="125" cy="64" r="19" fill="#f7d6b8"/>
+          <path d="M105 62 Q104 38 125 38 Q146 38 145 62 Q142 50 134 48 Q128 54 116 52 Q108 52 105 62Z" fill="#6b4a34"/>
+          <ellipse cx="136" cy="44" rx="6" ry="3.2" fill="#9fd3e0" transform="rotate(-25 136 44)"/><ellipse cx="143" cy="42" rx="6" ry="3.2" fill="#9fd3e0" transform="rotate(25 143 42)"/><circle cx="139.5" cy="43.5" r="2" fill="#7fbccd"/>
+          <circle cx="118" cy="66" r="2.7" fill="#2a1c16"/><circle cx="132" cy="66" r="2.7" fill="#2a1c16"/>
+          <circle cx="117.1" cy="65" r=".9" fill="#fff"/><circle cx="131.1" cy="65" r=".9" fill="#fff"/>
+          <path d="M114 60 q4 -2 7 0 M128 60 q4 -2 7 0" stroke="#5a3d2b" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+          <circle cx="112" cy="73" r="3.6" fill="#f2a39a" opacity=".6"/><circle cx="138" cy="73" r="3.6" fill="#f2a39a" opacity=".6"/>
+          <path d="M121 74 Q126 79 131 74" stroke="#9a4a3a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+          <!-- bouquet + bride arm -->
+          <path d="M136 106 Q141 118 130 124" fill="none" stroke="#f7d6b8" stroke-width="6" stroke-linecap="round"/>
+          <path d="M127 126 L131 136 L135 126Z" fill="#fffaf0" stroke="#e3d6bd" stroke-width=".8"/>
+          <ellipse cx="124" cy="120" rx="6" ry="2.4" fill="#5f9a62" transform="rotate(-30 124 120)"/><ellipse cx="138" cy="120" rx="6" ry="2.4" fill="#5f9a62" transform="rotate(30 138 120)"/>
+          <circle cx="126" cy="113" r="4.6" fill="#f4cf4a"/><circle cx="134" cy="112" r="4.6" fill="#f7da6a"/><circle cx="131" cy="119" r="4.6" fill="#f4cf4a"/><circle cx="123" cy="119" r="3.8" fill="#fff"/><circle cx="139" cy="118" r="3.8" fill="#fff"/>
+          <circle cx="126" cy="113" r="1.4" fill="#e3a92c"/><circle cx="134" cy="112" r="1.4" fill="#e3a92c"/><circle cx="131" cy="119" r="1.4" fill="#e3a92c"/>
+          <circle cx="130" cy="123" r="4" fill="#f7d6b8"/>
+          <polygon points="94.0,35.5 95.2,38.4 98.3,38.6 95.9,40.6 96.6,43.6 94.0,42.0 91.4,43.6 92.1,40.6 89.7,38.6 92.8,38.4" fill="#d6322f"/><polygon points="105.0,25.2 106.5,28.9 110.5,29.2 107.5,31.8 108.4,35.7 105.0,33.6 101.6,35.7 102.5,31.8 99.5,29.2 103.5,28.9" fill="#d6322f"/><polygon points="116.0,34.8 117.1,37.5 120.0,37.7 117.8,39.6 118.5,42.4 116.0,40.9 113.5,42.4 114.2,39.6 112.0,37.7 114.9,37.5" fill="#d6322f"/>
+        </svg>
+      </div>
     </div>
   </div>
 
@@ -372,32 +440,41 @@ footer{
         <div class="card rv">
           <div class="role">THE GROOM</div>
           <div class="sticker g" aria-label="Groom illustration">
-            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <clipPath id="cg"><circle cx="60" cy="60" r="52"/></clipPath>
-                <linearGradient id="bgg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6e7c4"/><stop offset="1" stop-color="#e8c7bd"/></linearGradient>
-              </defs>
-              <circle cx="60" cy="60" r="57" fill="#f8f2e4"/>
-              <circle cx="60" cy="60" r="52" fill="url(#bgg)"/>
-              <g clip-path="url(#cg)">
-                <path d="M14 122 Q18 86 60 84 Q102 86 106 122Z" fill="#14463a"/>
-                <path d="M60 84 L60 122" stroke="#d9bf8c" stroke-width="2.5"/>
-                <circle cx="60" cy="95" r="2.2" fill="#f0dfb8"/><circle cx="60" cy="105" r="2.2" fill="#f0dfb8"/><circle cx="60" cy="115" r="2.2" fill="#f0dfb8"/>
-                <path d="M44 84 Q60 98 76 84" fill="none" stroke="#d9bf8c" stroke-width="3"/>
-                <rect x="52" y="70" width="16" height="17" rx="6" fill="#dca983"/>
-                <ellipse cx="42" cy="58" rx="3.5" ry="5" fill="#e9b992"/><ellipse cx="78" cy="58" rx="3.5" ry="5" fill="#e9b992"/>
-                <ellipse cx="60" cy="56" rx="18" ry="20" fill="#f0c6a0"/>
-                <path d="M41 49 Q40 26 60 24 Q80 26 79 49 Q72 40 60 40 Q48 40 41 49Z" fill="#b8913a"/>
-                <path d="M41 46 Q60 38 79 46" fill="none" stroke="#f0dfb8" stroke-width="2.4"/>
-                <path d="M60 25 q10 -14 20 -10 q-8 2 -12 12z" fill="#d9bf8c"/>
-                <circle cx="60" cy="40" r="3" fill="#8f1d2c"/>
-                <path d="M51 56 q3.5 -4 7 0" fill="none" stroke="#3a2a20" stroke-width="2" stroke-linecap="round"/>
-                <path d="M62 56 q3.5 -4 7 0" fill="none" stroke="#3a2a20" stroke-width="2" stroke-linecap="round"/>
-                <path d="M51 64 Q60 59 69 64 Q60 66 51 64Z" fill="#3a2a20"/>
-                <path d="M54 68 Q60 73 66 68" fill="none" stroke="#9a4a3a" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="48" cy="63" r="3.5" fill="#e68b86" opacity=".45"/><circle cx="72" cy="63" r="3.5" fill="#e68b86" opacity=".45"/>
+            <svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
+              <path d="M46 110 Q20 132 26 176" fill="none" stroke="#2c2c32" stroke-width="24" stroke-linecap="round"/>
+              <path d="M114 110 Q140 132 134 176" fill="none" stroke="#2c2c32" stroke-width="24" stroke-linecap="round"/>
+              <path d="M28 176 Q50 168 66 150" fill="none" stroke="#2c2c32" stroke-width="20" stroke-linecap="round"/>
+              <path d="M132 176 Q110 168 94 150" fill="none" stroke="#2c2c32" stroke-width="20" stroke-linecap="round"/>
+              <path d="M38 108 Q58 94 80 96 Q102 94 122 108 L130 200 H30Z" fill="#2c2c32"/>
+              <path d="M40 110 Q60 98 80 100" fill="none" stroke="#fff" stroke-width="1.6" opacity=".7"/>
+              <path d="M120 110 Q100 98 80 100" fill="none" stroke="#fff" stroke-width="1.6" opacity=".7"/>
+              <path d="M62 108 L80 196 L98 108Z" fill="#1c1c21"/>
+              <circle cx="80" cy="168" r="2.2" fill="#555"/><circle cx="80" cy="182" r="2.2" fill="#555"/>
+              <path d="M66 96 L80 128 L94 96 L88 91 H72Z" fill="#fff"/>
+              <path d="M60 98 L80 150 L68 158 L50 118Z" fill="#3b3b44"/>
+              <path d="M100 98 L80 150 L92 158 L110 118Z" fill="#3b3b44"/>
+              <path d="M60 98 L50 118 M100 98 L110 118" stroke="#fff" stroke-width="1.6" opacity=".7"/>
+              <rect x="70" y="78" width="20" height="18" rx="6" fill="#efc9a6"/>
+              <path d="M70 90 Q80 98 90 90 V96 H70Z" fill="#fff"/>
+              <path d="M75 100 h10 l-2 8 h-6z" fill="#0f0f12"/>
+              <path d="M76 108 h8 l3 40 l-7 9 l-7 -9z" fill="#0f0f12"/>
+              <ellipse cx="59" cy="60" rx="4" ry="6" fill="#efc9a6"/><ellipse cx="101" cy="60" rx="4" ry="6" fill="#efc9a6"/>
+              <ellipse cx="80" cy="58" rx="22" ry="27" fill="#f6dcc2"/>
+              <path d="M56 56 Q50 30 76 24 Q108 20 108 54 Q104 38 94 36 Q80 44 60 44Z" fill="#3a2a22"/>
+              <path d="M62 34 Q80 22 98 30" fill="none" stroke="#5a4538" stroke-width="2" stroke-linecap="round"/>
+              <g transform="translate(106 126)">
+                <path d="M0 0 l-8 10 M0 0 l6 9" stroke="#3f7a52" stroke-width="2.4" stroke-linecap="round"/>
+                <circle cx="0" cy="-2" r="5" fill="#fff"/><circle cx="-6" cy="2" r="4" fill="#f4eee0"/><circle cx="6" cy="1" r="4" fill="#f4eee0"/>
+                <circle cx="0" cy="-2" r="1.8" fill="#d9bf8c"/>
               </g>
-              <circle cx="60" cy="60" r="52" fill="none" stroke="#d9bf8c" stroke-width="1.5"/>
+              <g fill="#f3d3b3" stroke="#d6a982" stroke-width="1">
+                <rect x="55" y="143" width="22" height="15" rx="7"/>
+                <rect x="83" y="143" width="22" height="15" rx="7"/>
+              </g>
+              <g stroke="#d6a982" stroke-width="1" opacity=".8">
+                <path d="M62 143 v8 M68 143 v8 M74 144 v7 M86 144 v7 M92 143 v8 M98 143 v8"/>
+              </g>
+              <path d="M44 176 H30 M130 176 H116" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".85"/>
             </svg>
           </div>
           <h3>Ahtesham Ibne Mostafa</h3>
@@ -414,34 +491,27 @@ footer{
         <div class="card rv d2">
           <div class="role">THE BRIDE</div>
           <div class="sticker b" aria-label="Bride illustration">
-            <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <clipPath id="cb"><circle cx="60" cy="60" r="52"/></clipPath>
-                <linearGradient id="bgb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6e7c4"/><stop offset="1" stop-color="#e8c7bd"/></linearGradient>
-              </defs>
-              <circle cx="60" cy="60" r="57" fill="#f8f2e4"/>
-              <circle cx="60" cy="60" r="52" fill="url(#bgb)"/>
-              <g clip-path="url(#cb)">
-                <path d="M26 122 Q20 44 60 20 Q100 44 94 122Z" fill="#7a1f2b"/>
-                <path d="M16 122 Q22 86 60 84 Q98 86 104 122Z" fill="#a3253a"/>
-                <path d="M30 100 Q60 90 90 100" fill="none" stroke="#d9bf8c" stroke-width="2"/>
-                <rect x="52" y="70" width="16" height="17" rx="6" fill="#dca983"/>
-                <path d="M44 84 Q60 100 76 84" fill="none" stroke="#d9bf8c" stroke-width="3.2"/>
-                <circle cx="60" cy="96" r="3" fill="#f0dfb8"/>
-                <ellipse cx="60" cy="56" rx="18" ry="20" fill="#f0c6a0"/>
-                <path d="M41 52 Q38 26 60 24 Q82 26 79 52 Q74 38 60 38 Q46 38 41 52Z" fill="#2a1a17"/>
-                <path d="M36 62 Q32 22 60 19 Q88 22 84 62" fill="none" stroke="#d9bf8c" stroke-width="2.6"/>
-                <path d="M60 24 L60 39" stroke="#d9bf8c" stroke-width="1.6"/>
-                <circle cx="60" cy="42" r="3.2" fill="#f0dfb8"/><circle cx="60" cy="42" r="1.4" fill="#8f1d2c"/>
-                <circle cx="41" cy="64" r="3" fill="#f0dfb8"/><circle cx="79" cy="64" r="3" fill="#f0dfb8"/>
-                <path d="M51 57 q3.5 3.5 7 0" fill="none" stroke="#3a2a20" stroke-width="2" stroke-linecap="round"/>
-                <path d="M62 57 q3.5 3.5 7 0" fill="none" stroke="#3a2a20" stroke-width="2" stroke-linecap="round"/>
-                <path d="M50 54 l-2 -2 M70 54 l2 -2" stroke="#3a2a20" stroke-width="1.6" stroke-linecap="round"/>
-                <path d="M60 60 q-1.5 4 1 5" fill="none" stroke="#c99472" stroke-width="1.6" stroke-linecap="round"/>
-                <path d="M53 69 Q60 74 67 69 Q60 71 53 69Z" fill="#c2384f" stroke="#c2384f" stroke-width="1.5" stroke-linejoin="round"/>
-                <circle cx="48" cy="65" r="3.5" fill="#e68b86" opacity=".5"/><circle cx="72" cy="65" r="3.5" fill="#e68b86" opacity=".5"/>
-              </g>
-              <circle cx="60" cy="60" r="52" fill="none" stroke="#d9bf8c" stroke-width="1.5"/>
+            <svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 200 Q16 122 44 76 Q48 28 80 26 Q112 28 116 76 Q144 122 130 200Z" fill="#7d2234"/>
+              <path d="M42 112 Q60 98 80 100 Q100 98 118 112 L128 200 H32Z" fill="#f7f0e1"/>
+              <path d="M62 102 Q80 122 98 102" fill="none" stroke="#d9bf8c" stroke-width="2.4"/>
+              <g fill="#d9bf8c"><circle cx="52" cy="138" r="1.8"/><circle cx="46" cy="156" r="1.8"/><circle cx="108" cy="138" r="1.8"/><circle cx="114" cy="156" r="1.8"/><circle cx="60" cy="178" r="1.8"/><circle cx="100" cy="178" r="1.8"/></g>
+              <path d="M42 82 Q28 134 36 196 L52 196 Q50 138 64 102Z" fill="#a43349"/>
+              <path d="M118 82 Q132 134 124 196 L108 196 Q110 138 96 102Z" fill="#a43349"/>
+              <path d="M36 196 Q44 198 52 196 M124 196 Q116 198 108 196" stroke="#d9bf8c" stroke-width="3" fill="none"/>
+              <rect x="70" y="80" width="20" height="20" rx="6" fill="#efc9a6"/>
+              <path d="M62 100 Q80 112 98 100 L98 104 Q80 118 62 104Z" fill="#d9bf8c"/>
+              <ellipse cx="80" cy="64" rx="21" ry="25" fill="#f6dcc2"/>
+              <path d="M58 60 Q58 38 80 37 Q102 38 102 60 Q94 48 80 48 Q66 48 58 60Z" fill="#2a1a17"/>
+              <path d="M44 80 Q46 32 80 30 Q114 32 116 80" fill="none" stroke="#d9bf8c" stroke-width="3.2"/>
+              <path d="M80 34 L80 48" stroke="#d9bf8c" stroke-width="1.6"/>
+              <circle cx="80" cy="52" r="3.6" fill="#f0dfb8"/><circle cx="80" cy="52" r="1.5" fill="#8f1d2c"/>
+              <circle cx="59" cy="70" r="3" fill="#f0dfb8"/><circle cx="101" cy="70" r="3" fill="#f0dfb8"/>
+              <path d="M70 196 L80 164 L90 196" fill="#3f7a52"/>
+              <path d="M62 170 Q80 150 98 170 L88 190 H72Z" fill="#4c8c60"/>
+              <circle cx="80" cy="152" r="10" fill="#f0b6bd"/><circle cx="68" cy="160" r="9" fill="#fff"/><circle cx="92" cy="160" r="9" fill="#f6d1d4"/>
+              <circle cx="80" cy="166" r="9" fill="#e8a2ab"/><circle cx="80" cy="152" r="3.5" fill="#d9bf8c"/><circle cx="68" cy="160" r="3" fill="#f0dfb8"/><circle cx="92" cy="160" r="3" fill="#f0dfb8"/>
+              <g fill="#f3d3b3" stroke="#d6a982" stroke-width="1"><ellipse cx="62" cy="172" rx="8" ry="6"/><ellipse cx="98" cy="172" rx="8" ry="6"/></g>
             </svg>
           </div>
           <h3>Sabrina Sarker Nisha</h3>
