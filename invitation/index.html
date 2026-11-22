@@ -27,7 +27,7 @@
   --ink:#10211c;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+
 body{
   font-family:'Cormorant Garamond',serif;
   color:var(--ivory);
@@ -296,7 +296,7 @@ section{padding:96px 22px;text-align:center;position:relative}
 .sign b{display:block;font-family:'Cinzel',serif;font-weight:600;letter-spacing:.08em;font-size:clamp(22px,6vw,30px);color:var(--gold-hi);margin:10px 0}
 .contact{margin-top:34px}
 footer{
-  position:relative;z-index:1;text-align:center;padding:30px 20px 46px;border-top:1px solid rgba(217,191,140,.2);
+  position:relative;z-index:1;text-align:center;padding:30px 20px 46px;
   font-family:'Jost',sans-serif;font-weight:300;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(248,242,228,.65);line-height:2
 }
 
@@ -398,7 +398,7 @@ body.ready .arch{animation:archIn 1.5s cubic-bezier(.2,.8,.2,1) .55s both, float
 .crow .tag svg{width:16px;height:16px;fill:none;stroke:var(--gold);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:360px){.crow{padding:14px 10px}.crow .num{letter-spacing:.05em}}
 
-/* ---- premium background: fine lattice + vignette + grain + hairline frame ---- */
+/* ---- premium background: fine lattice + vignette + grain ---- */
 .pattern{
   opacity:.13;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23d9bf8c' stroke-width='.6'%3E%3Crect x='22' y='22' width='56' height='56'/%3E%3Crect x='22' y='22' width='56' height='56' transform='rotate(45 50 50)'/%3E%3Ccircle cx='50' cy='50' r='19'/%3E%3Ccircle cx='50' cy='50' r='10'/%3E%3Cpath d='M0 -7L7 0L0 7L-7 0Z M100 -7L107 0L100 7L93 0Z M0 93L7 100L0 107L-7 100Z M100 93L107 100L100 107L93 100Z'/%3E%3Cpath d='M50 31V69M31 50H69' stroke-width='.4'/%3E%3C/g%3E%3Ccircle cx='50' cy='50' r='2.2' fill='%23d9bf8c'/%3E%3C/svg%3E");
@@ -408,16 +408,8 @@ body.ready .arch{animation:archIn 1.5s cubic-bezier(.2,.8,.2,1) .55s both, float
 }
 .vignette{position:fixed;inset:0;pointer-events:none;z-index:0;
   background:radial-gradient(120% 90% at 50% 40%,transparent 45%,rgba(2,10,7,.55) 100%)}
-.grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.07;mix-blend-mode:soft-light;
+.grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.05;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1  0 0 0 0 .92  0 0 0 0 .75  0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:220px 220px}
-.hairline{position:fixed;inset:10px;pointer-events:none;z-index:2;border:1px solid rgba(217,191,140,.2);
-  box-shadow:inset 0 0 0 4px transparent, inset 0 0 0 5px rgba(217,191,140,.07);opacity:0;transition:opacity 2s ease}
-body.ready .hairline{opacity:1}
-.hairline i{position:absolute;width:14px;height:14px;border:1px solid var(--gold);opacity:.7}
-.hairline i:nth-child(1){top:-1px;left:-1px;border-right:0;border-bottom:0}
-.hairline i:nth-child(2){top:-1px;right:-1px;border-left:0;border-bottom:0}
-.hairline i:nth-child(3){bottom:-1px;left:-1px;border-right:0;border-top:0}
-.hairline i:nth-child(4){bottom:-1px;right:-1px;border-left:0;border-top:0}
 
 /* ---- glitter only after the envelope opens ---- */
 #glitter{opacity:0;transition:opacity 2.5s ease}
@@ -431,6 +423,44 @@ body.ready .hairline{opacity:1}
 .music::before{content:"";position:absolute;inset:-1px;border-radius:50%;border:1px solid var(--gold);opacity:0;pointer-events:none}
 .music.on::before{animation:ripple 2.4s ease-out infinite}
 @keyframes ripple{0%{transform:scale(1);opacity:.55}100%{transform:scale(1.55);opacity:0}}
+
+/* ===================== v4: glitter text reveal (GPU-only: opacity + transform) ===================== */
+.tx .w{
+  display:inline-block;opacity:0;transform:translate3d(0,16px,0) scale(.98);
+  transition:opacity .9s ease, transform 1s cubic-bezier(.2,.7,.2,1);
+  transition-delay:calc(var(--o,0s) + var(--i,0)*var(--s,60ms));
+  background:linear-gradient(110deg,var(--tc,#f0dfb8) 42%,var(--hi,#fffdf2) 50%,var(--tc,#f0dfb8) 58%);
+  background-size:260% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+}
+.tx.in .w{
+  opacity:1;transform:none;
+  animation:sweep 1.7s ease-out calc(var(--o,0s) + var(--i,0)*var(--s,60ms) + .45s) 1 both;
+}
+@keyframes sweep{from{background-position:100% 0}to{background-position:0 0}}
+.rv.tx{transform:none;transition:opacity .5s ease}
+.rv.d1{--o:.12s}.rv.d2{--o:.24s}.rv.d3{--o:.36s}
+.orbs i{will-change:transform}
+.sticker{will-change:translate}
+.grain,.vignette,.glow,.pattern,#glitter{transform:translateZ(0)}
+@media (prefers-reduced-motion:reduce){
+  .tx .w{opacity:1;transform:none;transition:none;animation:none!important;color:inherit;-webkit-text-fill-color:currentColor;background:none}
+}
+
+/* ---- v5: subtle small music button + envelope card stays centred ---- */
+.music{width:34px;height:34px;top:max(12px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));
+  background:rgba(4,20,15,.35);border:1px solid rgba(217,191,140,.35);box-shadow:none;
+  -webkit-backdrop-filter:none;backdrop-filter:none}
+.music.show{opacity:.55}
+.music.show:hover,.music.show:active,.music.on.show{opacity:.85}
+.music:hover{background:rgba(217,191,140,.1)}
+.note{width:15px;height:15px}
+.note path,.note circle{stroke-width:1.6}
+.music:not(.on)::after{width:20px;height:1px}
+/* envelope: card rises less and the whole envelope slides down a little so the pair sits mid-screen */
+.env-wrap{transition:translate 1.1s cubic-bezier(.22,.8,.22,1)}
+#intro.lifted .env-wrap{translate:0 10%}
+.env.out .letter{transform:translateY(-30%)}
 </style>
 </head>
 <body class="locked">
@@ -446,7 +476,6 @@ body.ready .hairline{opacity:1}
 <div class="pattern"></div>
 <div class="vignette"></div>
 <div class="grain"></div>
-<div class="hairline" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 
 <!-- ============ INTRO ENVELOPE ============ -->
 <div id="intro" aria-label="Invitation envelope">
@@ -825,6 +854,7 @@ const Glitter = (() => {
     c.quadraticCurveTo(0,0,-s*2.8,0); c.quadraticCurveTo(0,0,0,-s*2.8); c.fill(); c.restore();
   }
   function frame(){
+    if(document.hidden){ requestAnimationFrame(frame); return; }
     c.clearRect(0,0,W,H);
     for(const p of P){
       p.y+=p.vy; p.ph+=p.sp; p.x+=Math.sin(p.ph)*p.sw*.4; p.tw+=p.ts;
@@ -838,17 +868,25 @@ const Glitter = (() => {
       }
     }
     for(let i=B.length-1;i>=0;i--){
-      const b=B[i]; b.x+=b.vx; b.y+=b.vy; b.vx*=.965; b.vy=b.vy*.965+.03; b.life-=.014;
+      const b=B[i]; b.x+=b.vx; b.y+=b.vy; b.vx*=.965; b.vy=b.vy*.965+(b.g||.03); b.life-=(b.d||.014);
       if(b.life<=0){B.splice(i,1);continue}
       star(b.x,b.y,b.r*1.4,Math.min(1,b.life*1.4),b.col);
     }
     c.globalAlpha=1; requestAnimationFrame(frame);
   }
-  size(); addEventListener("resize",size);
+  size(); let lw=innerWidth, lh=innerHeight;
+  addEventListener("resize",()=>{ if(innerWidth!==lw || Math.abs(innerHeight-lh)>160){ lw=innerWidth; lh=innerHeight; size(); } });
   let started=false;
-  return { start(){ if(started) return; started=true; cv.classList.add("on"); frame(); }, burst(x,y){
+  return { start(){ if(started) return; started=true; cv.classList.add("on"); frame(); }, dust(r,n){
+    if(B.length>170) return;
+    for(let i=0;i<n;i++){
+      B.push({x:r.left+Math.random()*r.width, y:r.top+Math.random()*r.height,
+        vx:(Math.random()-.5)*.7, vy:-Math.random()*.5-.1, g:.006, d:.009+Math.random()*.008,
+        r:Math.random()*1.3+.6, life:1+Math.random()*.4, col:cols[(Math.random()*cols.length)|0]});
+    }
+  }, burst(x,y,n){
     if(reduce) return;
-    for(let i=0;i<30;i++){
+    for(let i=0;i<(n||30);i++){
       const a=Math.random()*6.283, v=Math.random()*5+1.5;
       B.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.2,r:Math.random()*1.8+.8,life:Math.random()*.7+.7,col:cols[(Math.random()*cols.length)|0]});
     }
@@ -962,20 +1000,73 @@ function openInvite(){
   if(opened) return; opened = true;
   try{ Music.start(); }catch(e){}
   intro.classList.add("opening");
+  /* glitter as the envelope opens */
+  try{ $("glitter").style.transition="opacity .4s ease"; Glitter.start(); }catch(e){}
+  const er = () => env.getBoundingClientRect();
+  const spark = (fx,fy,n) => { const r=er(); try{ Glitter.burst(r.left+r.width*fx, r.top+r.height*fy, n); }catch(e){} };
+  const dustAll = n => { try{ Glitter.dust(er(), n); }catch(e){} };
+  spark(.5,.53,36);                                            // seal bursts open
+  setTimeout(()=>{ spark(.3,.2,22); spark(.7,.2,22); dustAll(16); },450);   // flap lifts
+  setTimeout(()=>{ spark(.5,.05,40); dustAll(18); },1250);     // card rises
+  const shimmer = setInterval(()=>dustAll(6),240);
+  setTimeout(()=>clearInterval(shimmer),2700);
   env.classList.add("open");                                   // seal fades, flap opens
-  setTimeout(()=>env.classList.add("out"),1200);               // little card pops half way out (stays on screen)
+  setTimeout(()=>{ env.classList.add("out"); intro.classList.add("lifted"); },1200);               // little card pops half way out (stays on screen)
   setTimeout(async()=>{ await fontsReady(); finishPage(); },2700); // then straight into the full invitation
 }
 intro.addEventListener("click", openInvite);
 env.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openInvite(); }});
 
-/* ---------------- scroll reveal ---------------- */
+/* ---------------- glitter text reveal ---------------- */
+const TX_SEL = ".arch .bism,.arch .eyebrow,.arch .wedding,.hero-date,.salam,.salam-en,.msg,.quote .ar,.quote .tr,.quote .en,"
+  + ".eyebrow.rv,.h-section,.venue-name,.venue-addr,.card .role,.card h3,.card .of,.card .par,.side,.attime,.celebrate,"
+  + ".map-note,.gift,.jazak,.sign,.c-title,.c-note,.contact .eyebrow";
+function splitWords(el){
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+  const nodes = []; let n; while(n = walker.nextNode()) if(n.nodeValue.trim()) nodes.push(n);
+  let i = 0;
+  nodes.forEach(node => {
+    const frag = document.createDocumentFragment();
+    const tc = getComputedStyle(node.parentNode).color;
+    node.nodeValue.split(/(\s+)/).forEach(part => {
+      if(!part) return;
+      if(/^\s+$/.test(part)){ frag.appendChild(document.createTextNode(" ")); return; }
+      const w = document.createElement("span"); w.className = "w"; w.textContent = part; w.style.setProperty("--i", i++); w.style.setProperty("--tc", tc);
+      frag.appendChild(w);
+    });
+    node.parentNode.replaceChild(frag, node);
+  });
+  return i;
+}
+function prepText(){
+  const seen = new Set();
+  document.querySelectorAll(TX_SEL).forEach(el => {
+    if(seen.has(el) || el.closest(".names") || el.querySelector(".tx")) return;
+    seen.add(el);
+    el.style.setProperty("--tc", getComputedStyle(el).color);
+    const count = splitWords(el);
+    if(!count) return;
+    el.style.setProperty("--s", Math.min(70, Math.round(1500/count)) + "ms");
+    el.classList.add("tx","rv");
+  });
+}
+try{ prepText(); }catch(e){ console.warn(e); }
+
+/* ---------------- scroll reveal (+ glitter dust where text appears) ---------------- */
 function observe(){
   const items = document.querySelectorAll(".rv");
+  const reveal = el => {
+    el.classList.add("in");
+    if(el.classList.contains("tx")){
+      const n = Math.min(16, 5 + Math.round(el.getBoundingClientRect().width/60));
+      setTimeout(()=>{ try{ Glitter.dust(el.getBoundingClientRect(), n); }catch(e){} }, 350);
+      setTimeout(()=>{ try{ Glitter.dust(el.getBoundingClientRect(), Math.ceil(n/2)); }catch(e){} }, 1100);
+    }
+  };
   if(!("IntersectionObserver" in window)){ items.forEach(i=>i.classList.add("in")); return; }
   const io = new IntersectionObserver(es => es.forEach(e => {
-    if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
-  }), {threshold:.15, rootMargin:"0px 0px -6% 0px"});
+    if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target); }
+  }), {threshold:.12, rootMargin:"0px 0px -5% 0px"});
   items.forEach(i => io.observe(i));
 }
 
