@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wedding Reception · Sabrina & Ahtesham</title>
-<meta name="description" content="You are cordially invited to the wedding reception of Sabrina Sarker Nisha & Ahtesham Ibne Mostafa, Friday 4th December 2026, MN Community Center, Maddhopara, Gaibandha.">
-<meta property="og:title" content="Wedding Reception · Sabrina & Ahtesham">
+<title>Wedding Ceremony · Sabrina & Ahtesham</title>
+<meta name="description" content="You are cordially invited to the Wedding Ceremony of Sabrina Sarker Nisha & Ahtesham Ibne Mostafa, Friday 4th December 2026, MN Community Center, Maddhopara, Gaibandha.">
+<meta property="og:title" content="Wedding Ceremony · Sabrina & Ahtesham">
 <meta property="og:description" content="Friday, 4th December 2026 · MN Community Center, Gaibandha">
 <meta name="theme-color" content="#F5EFE6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -150,7 +150,7 @@ footer{text-align:center;padding:30px 20px 60px;border-top:1px solid rgba(184,14
   <div class="float">
     <div class="env" id="env" role="button" tabindex="0" aria-label="Open invitation">
       <div class="back"></div>
-      <div class="letter"><div class="a">بِسْمِ اللَّهِ</div><div class="t">Wedding Reception</div><div class="n">Sabrina</div><div class="n" style="font-size:22px;color:var(--gold)">&amp;</div><div class="n">Ahtesham</div></div>
+      <div class="letter"><div class="a">بِسْمِ اللَّهِ</div><div class="t">Wedding Ceremony</div><div class="n">Sabrina</div><div class="n" style="font-size:22px;color:var(--gold)">&amp;</div><div class="n">Ahtesham</div></div>
       <div class="pocket"><div class="l"></div><div class="r"></div><div class="b"></div></div>
       <div class="flap"></div>
       <div class="seal">S&amp;A</div>
@@ -164,9 +164,9 @@ footer{text-align:center;padding:30px 20px 60px;border-top:1px solid rgba(184,14
     <div class="fcard"><div class="arch">
       <div class="bism rv">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
       <div class="eyebrow rv d1">In the name of Allah, the Most Gracious, the Most Merciful</div>
-      <div class="wed rv d1">The wedding reception of</div>
+      <div class="wed rv d1">The Wedding Ceremony of</div>
       <div class="names rv d2">Sabrina<span class="amp gold-text">&amp;</span>Ahtesham</div>
-      <div class="hdate rv d3"><b>Wedding Reception</b>FRIDAY · 4 DECEMBER 2026<div class="htime"><em>at</em><span style="font-family:'Cinzel',serif;letter-spacing:.2em;font-size:clamp(17px,4.6vw,21px)">1:00 PM</span></div></div>
+      <div class="hdate rv d3"><b>Wedding Ceremony</b>FRIDAY · 4 DECEMBER 2026<div class="htime"><em>at</em><span style="font-family:'Cinzel',serif;letter-spacing:.2em;font-size:clamp(17px,4.6vw,21px)">1:00 PM</span></div></div>
       <div class="cue rv d3">Scroll</div>
     </div></div>
   </section>
@@ -175,7 +175,7 @@ footer{text-align:center;padding:30px 20px 60px;border-top:1px solid rgba(184,14
     <div class="salam rv">ٱلسَّلَامُ عَلَيْكُمْ وَرَحْمَةُ ٱللَّٰهِ وَبَرَكَاتُهُ</div>
     <div class="salam-en rv d1">Assalamu Alaikum Wa Rahmatullahi Wa Barakatuh</div>
     <div class="orn rv d1">✦</div>
-    <p class="msg rv d2">With the blessings of Almighty Allah and the guidance of the Sunnah of His Beloved Messenger ﷺ, we, <b>Md. Solaiman Hossain</b> &amp; <b>Mst. Anjuara Begum</b>, cordially request your gracious presence and blessings at the wedding reception of our 2nd daughter. We humbly ask for your prayers and blessings for them and their future life together.</p>
+    <p class="msg rv d2">With the blessings of Almighty Allah and the guidance of the Sunnah of His Beloved Messenger ﷺ, we, <b>Md. Solaiman Hossain</b> &amp; <b>Mst. Anjuara Begum</b>, cordially request your gracious presence and blessings at the Wedding Ceremony of our 2nd daughter. We humbly ask for your prayers and blessings for them and their future life together.</p>
     <div class="quote rv d3">
       <div class="ar">بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ</div>
       <div class="tr">“Barakallahu laka wa baraka alayka wa jama’a baynakuma fi khayr.”</div>
@@ -222,7 +222,7 @@ footer{text-align:center;padding:30px 20px 60px;border-top:1px solid rgba(184,14
   </div></section>
 
   <section id="schedule" hidden><div class="wrap">
-    <div class="eyebrow rv">Programme</div><h2 class="h rv d1" style="margin-top:10px">Wedding Reception Schedule</h2><div class="orn rv d1">✦</div>
+    <div class="eyebrow rv">Programme</div><h2 class="h rv d1" style="margin-top:10px">Wedding Ceremony Schedule</h2><div class="orn rv d1">✦</div>
     <div class="timeline" id="timeline"></div>
   </div></section>
 
@@ -341,14 +341,14 @@ if(hasTime){const[h,m]=CONFIG.startTime.split(":").map(Number);$("attime").inner
 function tick(){const d=startDate-Date.now();if(d<=0){$("count").style.display="none";$("celebrate").hidden=false;$("celebrate").classList.add("in");return}
   const s=Math.floor(d/1000);$("cd").textContent=Math.floor(s/86400);$("ch").textContent=pad(Math.floor(s%86400/3600));$("cm").textContent=pad(Math.floor(s%3600/60));$("cs").textContent=pad(s%60)}
 tick();setInterval(tick,1000);
-const title="Wedding Reception of Sabrina & Ahtesham",details="Please bless the newly wed couple at their wedding reception. RSVP: 01716-108857, 01727-443436";
+const title="Wedding Ceremony of Sabrina & Ahtesham",details="Please bless the newly wed couple at their Wedding Ceremony. RSVP: 01716-108857, 01727-443436";
 $("gcal").href="https://calendar.google.com/calendar/render?action=TEMPLATE&text="+encodeURIComponent(title)+"&dates="+(hasTime?fmt(startDate)+"/"+fmt(endDate):"20261204/20261205")+"&location="+encodeURIComponent(VENUE)+"&details="+encodeURIComponent(details);
 $("icsBtn").addEventListener("click",()=>{const L=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Wedding Invitation//EN","BEGIN:VEVENT","UID:reception-20261204@invitation","DTSTAMP:"+fmt(new Date()),
   hasTime?"DTSTART:"+fmt(startDate):"DTSTART;VALUE=DATE:20261204",hasTime?"DTEND:"+fmt(endDate):"DTEND;VALUE=DATE:20261205","SUMMARY:"+title,"LOCATION:"+VENUE.replace(/,/g,"\\,"),"DESCRIPTION:"+details,"END:VEVENT","END:VCALENDAR"];
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([L.join("\r\n")],{type:"text/calendar"}));a.download="wedding-reception.ics";a.click();URL.revokeObjectURL(a.href)});
 if(CONFIG.schedule.length){$("schedule").hidden=false;$("timeline").innerHTML=CONFIG.schedule.map((s,i)=>`<div class="tl rv d${Math.min(i,3)}"><div class="dot">${i+1}</div><div><div class="tm">${s.time}</div><div class="ev">${s.title}</div></div></div>`).join("")}
 if(CONFIG.whatsapp){$("wa").hidden=false;$("wa").href="https://wa.me/"+CONFIG.whatsapp}
-$("shareBtn").addEventListener("click",async()=>{const d={title:document.title,text:"You’re invited to the wedding reception of Sabrina & Ahtesham, Friday 4th December 2026.",url:location.href};
+$("shareBtn").addEventListener("click",async()=>{const d={title:document.title,text:"You’re invited to the Wedding Ceremony of Sabrina & Ahtesham, Friday 4th December 2026.",url:location.href};
   if(navigator.share){try{await navigator.share(d)}catch(e){}}else{try{await navigator.clipboard.writeText(location.href);const b=$("shareBtn");b.textContent="Link Copied";setTimeout(()=>b.textContent="Share Invitation",2000)}catch(e){}}});
 </script>
 </body>
